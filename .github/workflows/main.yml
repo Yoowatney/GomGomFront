@@ -1,0 +1,11 @@
+on:
+  push:
+    branches: [main]
+
+jobs:
+  if_pass:
+    runs-on: ubuntu-latest
+    if: >-
+      github.event.state == 'success'
+    steps:
+      - run : ls -al
