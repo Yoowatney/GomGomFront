@@ -5,13 +5,15 @@ jobs:
   webhook:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name : Set env
+        run : |
+            [${{github.event.deployment_status.state}} -eq 'success' ] && COLOR=5763719 || COLOR=15548997
+            echo "COLOR=${COLOR}" >> $GITHUB_ENV
       - name : Discord Webhook
         uses : tsickert/discord-webhook@v5.3.0
         with:
           webhook-url : ${{ secrets.DISCORD_WEBHOOK_URL }}
           embed-title : "Deployment Status"
           embed-description : "${{ github.event.deployment_status.state }}, ${{ github.event.deployment_status.description}}"
-          embed-color : |
-              ${{ github.event.deployment_status.state }} === 'success' ?  5763719 : 15548997
+          embed-color : COLOR
         if: always()
