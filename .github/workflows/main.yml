@@ -1,8 +1,9 @@
 on:
-  deployment
+  deployment_status
 
 jobs:
-  if_deployment_on_vercel:
+  webhook:
+    if: ${{ github.event.deployment_status.state == 'success'}}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -10,4 +11,5 @@ jobs:
         uses : tsickert/discord-webhook@v5.3.0
         with:
           webhook-url : ${{ secrets.DISCORD_WEBHOOK_URL }}
-          raw-data : webhook.json
+          content : "${{ github.event.deployment_status.state }}, ${{ github.event.deployment_status.description}}"
+        if: always()
