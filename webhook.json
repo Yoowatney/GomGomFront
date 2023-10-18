@@ -1,0 +1,4 @@
+{
+  "content": "Test",
+  "embeds": [{ "title": "Hello", "description": "World" }]
+}
