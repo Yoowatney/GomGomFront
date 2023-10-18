@@ -15,5 +15,5 @@ jobs:
           webhook-url : ${{ secrets.DISCORD_WEBHOOK_URL }}
           embed-title : "Deployment Status"
           embed-description : "${{ github.event.deployment_status.state }}, ${{ github.event.deployment_status.description}}"
-          embed-color : $COLOR
+          embed-color : env.COLOR
         if: always()
