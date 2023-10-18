@@ -1,6 +1,5 @@
 on:
-  push:
-    branches: [main]
+  deployment
 
 jobs:
   if_pass:
@@ -8,4 +7,4 @@ jobs:
     # if: >-
     #   github.event.state == 'success'
     steps:
-      - run : echo ${{ github.event.description }}
+      - run : echo ${{ github.event.state }}
