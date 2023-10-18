@@ -2,9 +2,11 @@ on:
   deployment
 
 jobs:
-  if_pass:
+  if_deployment_on_vercel:
     runs-on: ubuntu-latest
-    # if: >-
-    #   github.event.state == 'success'
     steps:
-      - run : echo ${{ github.event.state }}
+      - name : Discord Webhook
+        uses : tsickert/discord-webhook@v5.3.0
+        with:
+          webhook-url : ${{ secrets.DISCORD_WEBHOOK_URL }}
+          content: "Test"
