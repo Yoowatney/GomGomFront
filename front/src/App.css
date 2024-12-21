@@ -23,9 +23,12 @@ body {
 }
 
 :root {
-  --main-color: #ffd1d1;
-  --point-color: #ff9494;
-  --hover-color: #ff7979;
+  /* --main-color: #ffd1d1; */
+  --main-color: #df2e38;
+  --point-color: #5d9c59;
+  /* --point-color: #ff9494; */
+  --hover-color: #8fcc8b;
+  /* --hover-color: #ff7979; */
   --text-color: #424242;
   --border-color: #cccccc;
   --background-color: #fafafa;

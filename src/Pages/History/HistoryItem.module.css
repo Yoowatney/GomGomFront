@@ -77,10 +77,10 @@
   cursor: pointer;
 }
 
-.answerer:hover {
+/* .answerer:hover {
   background-color: var(--main-color);
   color: var(--point-color);
-}
+} */
 
 .answerer div {
   flex-grow: 1;
