@@ -22,8 +22,7 @@
 
 .middle {
   text-align: center;
-  background-color: #ffd1d1;
-  /* background-color: var(--main-color); */
+  background-color: var(--main-color);
   padding: 30px;
 }
 
