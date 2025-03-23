@@ -58,8 +58,10 @@
 
 .okBtn:hover,
 .confirmBtn:hover,
-.eventBtn:hover {
+.eventBtn:hover,
+.closeBtn:hover {
   background-color: var(--hover-color);
+  color: white;
 }
 
 .message {
@@ -104,18 +106,8 @@
   text-align: center;
 }
 
+.eventBtn,
 .closeBtn {
-  border: none;
-  background-color: var(--point-color);
-  border-radius: 20px;
-  padding: 5px;
-  color: white;
-  width: 200px;
-  height: 30px;
-  cursor: pointer;
-}
-
-.eventBtn {
   border: var(--point-color) 1px solid;
   background-color: white;
   border-radius: 20px;
