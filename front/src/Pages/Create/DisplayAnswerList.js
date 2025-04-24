@@ -372,7 +372,7 @@ const DisplayAnswerList = ({ goToFirstStep }) => {
                     {person.answerer} 님의 답장
                   </div>
 
-                  {/* <button
+                  <button
                     className={Styles.chatIcon}
                     onClick={() => handleOpenChat(person._id, person.roomId)}
                   >
@@ -385,7 +385,7 @@ const DisplayAnswerList = ({ goToFirstStep }) => {
                       : correctAnswerer === diaryId && !person.roomId
                       ? '📭'
                       : null}
-                  </button> */}
+                  </button>
                 </div>
               ))}
             </div>
