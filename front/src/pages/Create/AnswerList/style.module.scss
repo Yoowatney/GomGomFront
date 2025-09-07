@@ -1,0 +1,18 @@
+@import '../../../styles/color.scss';
+
+.Layout {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.Description {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  line-height: 1.5;
+}
+
+.Link {
+  color: $color-black;
+}

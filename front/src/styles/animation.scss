@@ -1,0 +1,33 @@
+@keyframes swingAnimation {
+  0% {
+    transform: rotate(-10deg);
+  }
+  50% {
+    transform: rotate(15deg);
+  }
+  100% {
+    transform: rotate(-10deg);
+  }
+}
+
+@keyframes scaleAnimation {
+  0% {
+    transform: scale(1.05);
+  }
+  50% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.05);
+  }
+}
+
+.clickEffect {
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:active {
+    transition: all 0s;
+    transform: scale(0.9);
+  }
+}

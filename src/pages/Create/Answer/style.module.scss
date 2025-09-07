@@ -1,0 +1,33 @@
+@import '../../../styles/animation.scss';
+@import '../../../styles/color.scss';
+
+.Layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  padding: 50px 10px;
+  text-align: center;
+  width: 100%;
+}
+
+.AnswerInfo {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.Answerer {
+  font-size: 20px;
+}
+
+.QuestionNum {
+  color: $color-point;
+  font-size: 20px;
+}
+
+.Answer {
+  width: 300px;
+  overflow-wrap: break-word;
+}

@@ -1,0 +1,17 @@
+@import '../../styles/animation.scss';
+@import '../../styles/color.scss';
+
+.Layout {
+  text-align: center;
+  animation: scaleAnimation 2s infinite;
+}
+
+.Emoji {
+  cursor: pointer;
+  font-size: 54px;
+}
+
+.Message {
+  font-size: 16px;
+  color: $color-point;
+}

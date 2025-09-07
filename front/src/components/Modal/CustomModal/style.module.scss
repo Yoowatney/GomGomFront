@@ -1,0 +1,42 @@
+@import '../../../styles/color.scss';
+
+.Layout {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 315px;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  background-color: $color-white;
+  border: 1px solid $color-point;
+  padding: 20px;
+  border-radius: 10px;
+  gap: 30px;
+
+  text-align: center;
+}
+
+.Title {
+  font-size: 20px;
+}
+
+.Desc {
+  text-wrap: pretty;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.Buttons {
+  display: flex;
+  gap: 5px;
+}
+
+.ConfirmButton,
+.CancelButton {
+  width: 100px;
+}

@@ -1,0 +1,42 @@
+@import '../../styles/color.scss';
+@import '../../styles/animation.scss';
+
+.Button {
+  display: block;
+  border: none;
+  background-color: $color-main;
+  border-radius: 20px;
+  padding: 8px;
+  color: $color-white;
+  width: 150px;
+  margin: 0 auto;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.default {
+  background-color: $color-point;
+  border-color: $color-grey;
+  color: $color-white;
+
+  &:hover {
+    background-color: $color-hover;
+  }
+}
+
+.white {
+  background-color: $color-white;
+  color: $color-point;
+  border: 1px solid $color-main;
+
+  &:hover {
+    background-color: $color-main;
+    color: $color-white;
+  }
+}
+
+.grey {
+  color: $color-black;
+  border: 1px solid $color-grey;
+  background-color: $color-white;
+}

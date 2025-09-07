@@ -1,0 +1,13 @@
+@import '../../styles/color.scss';
+
+.SelectSortOrderWrapper {
+  width: 100%;
+  text-align: right;
+}
+
+.SelectSortOrder {
+  border: none;
+  background-color: transparent;
+  padding: 3px 0px;
+  color: $color-point;
+}

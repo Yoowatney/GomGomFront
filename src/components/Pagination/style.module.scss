@@ -1,0 +1,21 @@
+@import '../../styles/color.scss';
+
+.PageButtons button {
+  border: none;
+  background-color: $color-main;
+  border-radius: 100%;
+  width: 20px;
+  height: 20px;
+  color: $color-white;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 3px;
+}
+
+.PageButtons .CurrentPage {
+  background-color: $color-point;
+}
+
+.PageButtons .Disabled {
+  background-color: $color-grey;
+}

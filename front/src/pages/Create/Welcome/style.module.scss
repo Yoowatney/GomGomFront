@@ -1,0 +1,30 @@
+@import '../../../styles/color.scss';
+@import '../../../styles/animation.scss';
+
+.Layout {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+  text-align: center;
+}
+
+.Title {
+  font-size: 20px;
+  text-align: center;
+  line-height: 1.2;
+
+  .Logo {
+    animation: swingAnimation 1s infinite;
+    font-size: 40px;
+  }
+}
+
+.Intro {
+  font-size: 18px;
+  line-height: 1.4;
+  color: $color-point;
+  padding: 10px 0px;
+  font-weight: 700;
+  text-align: center;
+}

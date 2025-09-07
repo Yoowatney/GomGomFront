@@ -1,0 +1,28 @@
+@import '../../../styles/color.scss';
+
+.Layout {
+  width: 90%;
+  max-height: 300px;
+  overflow-y: scroll;
+  overflow-wrap: break-word;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.Wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.Content {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.Title {
+  color: $color-point;
+}
