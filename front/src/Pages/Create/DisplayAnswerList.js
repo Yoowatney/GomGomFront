@@ -9,7 +9,7 @@ import { Question } from '../../store/Create/Question';
 import { useNavigate } from 'react-router-dom';
 import Btn from '../../components/Btn';
 import WhiteBtn from '../../components/WhiteBtn';
-import { getCookie } from '../../api/cookie';
+import { getCookie, setCookie } from '../../api/cookie';
 import ResponseContent from '../../components/ResponseContent';
 import CustomModal from '../../components/CustomModal';
 import ConfirmModal from '../../components/ConfirmModal';
@@ -23,13 +23,52 @@ import { OriginQuestionNum } from '../../store/Create/OriginQuestionNum';
 import { QuestionNum } from '../../store/Create/QuestionNum';
 import { EventTrigger } from '../../gtag';
 
-import { RoomId } from '../../store/Chat/RoomId';
-import { ChatToken } from '../../store/Chat/ChatToken';
-import { GuestAddress } from '../../store/Chat/GuestAddress';
+import { RoomId } from '../../store/chat/RoomId';
+import { ChatToken } from '../../store/chat/ChatToken';
+import { GuestAddress } from '../../store/chat/GuestAddress';
 
 const DisplayAnswerList = ({ goToFirstStep }) => {
   const navigate = useNavigate();
   const { diaryId } = useParams();
+
+  const diaryIdCookie = getCookie('diaryAddress');
+  const diaryUser = getCookie('diaryUser');
+  const localDiaryId = localStorage.getItem('diaryAddress');
+  const localDiaryUser = localStorage.getItem('diaryUser');
+
+  useEffect(() => {
+    // 쿠키에 있는 값이 로컬 스토리지로, 로컬 스토리지에 있는 값이 쿠키로 이동
+    if (diaryIdCookie || diaryUser) {
+      localStorage.setItem('diaryAddress', diaryIdCookie);
+      localStorage.setItem('diaryUser', diaryUser);
+    } else if (localDiaryId || localDiaryUser) {
+      setCookie('diaryAddress', localDiaryId);
+      setCookie('diaryUser', localDiaryUser);
+    }
+  }, [diaryIdCookie, diaryUser, localDiaryId, localDiaryUser]);
+
+  const correctAnswerer = getCookie('diaryAddress');
+  const [isDiaryOwner, setIsDiaryOwner] = useState(false);
+
+  useEffect(() => {
+    if (correctAnswerer === diaryId) {
+      setIsDiaryOwner(true);
+    }
+  }, []);
+
+  // const correctAnswerer = getCookie('diaryAddress');
+  // const [isDiaryOwner, setIsDiaryOwner] = useState(false);
+
+  // useEffect(() => {
+  //   if (
+  //     diaryIdCookie ||
+  //     diaryUser ||
+  //     localDiaryId ||
+  //     localDiaryUser === diaryId
+  //   ) {
+  //     setIsDiaryOwner(true);
+  //   }
+  // }, []);
 
   /* 다이어리 전역 상태 관리 */
   const [answererList, setAnswererList] = useState([]);
@@ -100,15 +139,27 @@ const DisplayAnswerList = ({ goToFirstStep }) => {
   const [isConnected, setIsConnected] = useState(false);
   const [wantNewDiary, setWantNewDiary] = useState(false);
 
-  const handleDisplayResponse = answerId => {
-    axiosInstance
-      .get(`diary/answer/${diaryId}/${answerId}`)
-      .then(response => {
+  const handleDisplayResponse = async answerId => {
+    if (!getCookie('diaryAddress') || !getCookie('diaryUser')) {
+      if (diaryIdCookie || diaryUser) {
+        setCookie('diaryAddress', localDiaryId);
+        setCookie('diaryUser', localDiaryUser);
+      }
+    }
+
+    try {
+      const redirectDiaryId = diaryId || localDiaryId;
+      const response = await axiosInstance.get(
+        `diary/answer/${redirectDiaryId}/${answerId}`
+      );
+      if (response) {
         setAnswer(response.data.answer);
         setQuestion(response.data.question);
-        navigate(`/answer/${diaryId}/${answerId}`);
-      })
-      .catch(error => setIsAnswerer(true));
+        navigate(`/answer/${redirectDiaryId}/${answerId}`);
+      }
+    } catch (error) {
+      setIsAnswerer(true);
+    }
   };
 
   let host = window.location.origin;
@@ -157,15 +208,6 @@ const DisplayAnswerList = ({ goToFirstStep }) => {
       });
     }
   };
-
-  const correctAnswerer = getCookie('diaryAddress');
-  const [isDiaryOwner, setIsDiaryOwner] = useState(false);
-
-  useEffect(() => {
-    if (correctAnswerer === diaryId) {
-      setIsDiaryOwner(true);
-    }
-  }, []);
 
   const [isCopied, setIsCopied] = useState(false);
 
@@ -330,7 +372,7 @@ const DisplayAnswerList = ({ goToFirstStep }) => {
                     {person.answerer} 님의 답장
                   </div>
 
-                  {/* <button
+                  <button
                     className={Styles.chatIcon}
                     onClick={() => handleOpenChat(person._id, person.roomId)}
                   >
@@ -343,7 +385,7 @@ const DisplayAnswerList = ({ goToFirstStep }) => {
                       : correctAnswerer === diaryId && !person.roomId
                       ? '📭'
                       : null}
-                  </button> */}
+                  </button>
                 </div>
               ))}
             </div>
@@ -430,7 +472,7 @@ const DisplayAnswerList = ({ goToFirstStep }) => {
       {wantNewDiary && (
         <ConfirmModal
           message={`새로 만들면 이전 다이어리는 저장됩니다.
-            저장된 다이어리는 최근 답장 5개만 볼 수 있어요.`}
+            (왼쪽 시계를 클릭하면 이전 다이어리를 볼 수 있어요!)`}
           updateModal={handleModalClose}
           goToFirstStep={goToFirstStep}
         />
