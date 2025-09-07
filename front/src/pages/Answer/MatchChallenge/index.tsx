@@ -53,23 +53,21 @@ const MatchChallenge = () => {
           return;
         }
 
-        if (answererToken) {
-          const hasAlreadyAnswered = await checkHasAlreadyAnswered({
-            diaryAddress,
-            answererToken,
-          });
-          setHasAlreadyAnswered(hasAlreadyAnswered);
+        const hasAlreadyAnswered = await checkHasAlreadyAnswered({
+          diaryAddress,
+          answererToken,
+        });
+        setHasAlreadyAnswered(hasAlreadyAnswered);
 
-          if (hasAlreadyAnswered) {
-            openModal({
-              title: '안내사항',
-              description:
-                '이미 답장한 다이어리엔 또 답장할 수 없어요! \n 답장 리스트로 돌아갈게요 :)',
-              onConfirmCallback: () =>
-                void navigate(`/answerers/${diaryAddress}`),
-            });
-            return;
-          }
+        if (hasAlreadyAnswered) {
+          openModal({
+            title: '안내사항',
+            description:
+              '이미 답장한 다이어리엔 또 답장할 수 없어요! \n 답장 리스트로 돌아갈게요 :)',
+            onConfirmCallback: () =>
+              void navigate(`/answerers/${diaryAddress}`),
+          });
+          return;
         }
 
         const questionerInfo = await getQuestionerInfo(diaryAddress);
