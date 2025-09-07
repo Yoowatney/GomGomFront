@@ -33,7 +33,10 @@ const History = () => {
           openModal({
             title: '⚠️ 알림',
             description: '저장된 다이어리가 없어요.',
-            onConfirmCallback: closeModal,
+            onConfirmCallback: () => {
+              closeModal();
+              void navigate('/');
+            },
           });
         } else {
           setHistoryList(response.historyList);
@@ -44,7 +47,10 @@ const History = () => {
           openModal({
             title: '⚠️ 오류',
             description: '저장된 다이어리가 없어요.',
-            onConfirmCallback: closeModal,
+            onConfirmCallback: () => {
+              closeModal();
+              void navigate('/');
+            },
           });
         }
         console.error('Failed to fetch history diary:', error);
