@@ -87,7 +87,6 @@ const Chat = () => {
       });
 
       if (isEnter) {
-        // console.log('메세지 수신 준비 완료');
         socket.on('receive_message', message => {
           const newMessage = {
             chat: message.chat,
@@ -290,11 +289,11 @@ const Chat = () => {
         </div>
         <input
           className={Styles.messageInput}
-          type="input"
+          type='input'
           value={message}
           onChange={handleMessageInput}
           onKeyUp={handleMessageSend}
-          placeholder="100자 이내로 입력해주세요."
+          placeholder='100자 이내로 입력해주세요.'
         />
       </div>
       {isScaleover && (
