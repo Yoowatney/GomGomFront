@@ -146,10 +146,10 @@ const EmptyAnswerList = (props: Props) => {
         {isDiaryOwner && (
           <div className={Style.ShareButtons}>
             <button className={Style.Kakaotalk} onClick={handleShareKakaoTalk}>
-              <img src="/public/image/icon/icon-KakaoTalk.svg" />
+              <img src="/image/icon/icon-KakaoTalk.svg" />
             </button>
             <button className={Style.LinkCopy} onClick={handleCopyLink}>
-              <img src="/public/image/icon/icon-LinkCopy.svg" />
+              <img src="/image/icon/icon-LinkCopy.svg" />
             </button>
           </div>
         )}

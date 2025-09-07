@@ -71,7 +71,7 @@ const Answerer = () => {
           당신의 이름을 알려주세요.
         </div>
         <div>
-          <div>⚠️ 부적절한 이름은 제제를 받을 수 있습니다.</div>
+          <div>⚠️ 부적절한 이름은 제재를 받을 수 있습니다.</div>
         </div>
       </div>
       <div className={Style.Middle}>

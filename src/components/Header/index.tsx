@@ -67,7 +67,7 @@ const Header = (): ReactElement => {
         onClick={() => void navigate('/history')}
       />
       <div className={Style.Title} onClick={() => void navigate('/')}>
-        Gom Gom Diary
+        GomGom Diary
       </div>
       <RiMenuLine className={Style.Icon} onClick={handleToggle} />
       {isOpen && (
