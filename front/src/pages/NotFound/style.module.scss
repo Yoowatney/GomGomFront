@@ -1,0 +1,26 @@
+@import '../../styles/color.scss';
+
+.Layout {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 12px;
+}
+
+.Emoji {
+  font-size: 40px;
+}
+
+.Notice {
+  display: flex;
+  flex-direction: column;
+}
+
+.Title {
+  font-size: 28px;
+  color: $color-hover;
+}
+
+.Desc {
+  font-size: 20px;
+}

@@ -1,0 +1,43 @@
+@import '../../styles/color.scss';
+
+.Layout {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ListTable {
+  width: 100%;
+  border-bottom: 1px solid $color-main;
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  font-size: 16px;
+  justify-content: center;
+  align-items: center;
+}
+
+.ChatIcon {
+  border: none;
+  background-color: transparent;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.CorrectAnswerer {
+  color: $color-point;
+  cursor: pointer;
+  width: 168px;
+}
+
+.Owner {
+  color: black;
+  cursor: pointer;
+  width: 168px;
+}
+
+.NotOwner {
+  color: $color-grey;
+  cursor: pointer;
+  width: 168px;
+}

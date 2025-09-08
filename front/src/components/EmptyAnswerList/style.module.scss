@@ -1,0 +1,50 @@
+@import '../../styles/color.scss';
+@import '../../styles/animation.scss';
+
+.Layout {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.Title {
+  font-size: 20px;
+  white-space: pre-wrap;
+}
+
+.Desc {
+  font-size: 100px;
+  font-weight: 700;
+}
+
+.Buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.ShareButtons {
+  display: flex;
+  gap: 10px;
+
+  button {
+    animation: scaleAnimation 1s infinite;
+
+    width: 45px;
+    height: 45px;
+    border-radius: 50px;
+    padding: 12px;
+    cursor: pointer;
+  }
+}
+
+.Kakaotalk {
+  border: none;
+  background-color: $color-kakaoTalk;
+}
+
+.LinkCopy {
+  border: 1px solid $color-grey;
+  background-color: $color-white;
+}

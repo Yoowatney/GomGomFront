@@ -1,0 +1,47 @@
+@import '../../../styles/color.scss';
+
+.MessageContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+.ReceiveMessage {
+  align-items: flex-start;
+  text-align: left;
+}
+
+.SendMessage {
+  align-items: flex-end;
+  text-align: right;
+}
+
+.MessageWrapper {
+  max-width: 300px;
+  word-wrap: break-word;
+  overflow-y: auto;
+  padding: 10px;
+  margin: 5px 0;
+}
+
+.ReceiveMessage .MessageWrapper {
+  background-color: $color-receiveMessage;
+  border-radius: 5px;
+}
+
+.SendMessage .MessageWrapper {
+  background-color: $color-sendMessage;
+  border-radius: 5px;
+}
+
+.Receiver,
+.ReceiveTime {
+  font-size: 12px;
+}
+
+.Sender,
+.SendTime {
+  font-size: 12px;
+}
