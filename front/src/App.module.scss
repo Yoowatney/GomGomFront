@@ -1,7 +1,7 @@
 .AppContent {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: calc(100vh - 60px);
 }
 
 .MainContent {
@@ -11,13 +11,8 @@
   align-items: center;
   flex-grow: 1;
   padding-top: 35px;
-  min-height: calc(100vh - 120px);
 }
 
 .Ad {
   padding: 10px;
-  position: sticky;
-  bottom: 0;
-  background-color: white;
-  z-index: 10;
 }
