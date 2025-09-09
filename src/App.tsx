@@ -18,10 +18,10 @@ function App() {
       <Header />
       <main className={Style.MainContent}>
         <Outlet />
-        <div className={Style.Ad}>
-          <Ad unit={'DAN-ZGJjaUD6AoC29nFb'} width={320} height={50} />
-        </div>
       </main>
+      <div className={Style.Ad}>
+        <Ad unit={'DAN-ZGJjaUD6AoC29nFb'} width={320} height={50} />
+      </div>
     </div>
   );
 }
