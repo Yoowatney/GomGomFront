@@ -11,8 +11,13 @@
   align-items: center;
   flex-grow: 1;
   padding-top: 35px;
+  min-height: calc(100vh - 120px);
 }
 
 .Ad {
   padding: 10px;
+  position: sticky;
+  bottom: 0;
+  background-color: white;
+  z-index: 10;
 }
