@@ -34,21 +34,25 @@ const Answer = () => {
   }
 
   return (
-    <div className={Style.Layout}>
-      <div className={Style.AnswerInfo}>
-        <div className={Style.Answerer}>{answerData.answerer}님의 답장💌</div>
-        <div>작성일: {new Date(answerData.createdAt).toLocaleDateString()}</div>
-      </div>
-
-      {answerData.answers.map((answer, index) => (
-        <div className={Style.Answer} key={index}>
-          <div className={Style.QuestionNum}>{index + 1}번 질문</div>
-          <div>Q: {questionData.question[index]}</div>
-          <div>A: {answer}</div>
+    <div className={Style.A}>
+      <div className={Style.Layout}>
+        <div className={Style.AnswerInfo}>
+          <div className={Style.Answerer}>{answerData.answerer}님의 답장💌</div>
+          <div>
+            작성일: {new Date(answerData.createdAt).toLocaleDateString()}
+          </div>
         </div>
-      ))}
 
-      <Button onClick={() => void navigate(-1)}>뒤로 가기</Button>
+        {answerData.answers.map((answer, index) => (
+          <div className={Style.Answer} key={index}>
+            <div className={Style.QuestionNum}>{index + 1}번 질문</div>
+            <div>Q: {questionData.question[index]}</div>
+            <div>A: {answer}</div>
+          </div>
+        ))}
+
+        <Button onClick={() => void navigate(-1)}>뒤로 가기</Button>
+      </div>
     </div>
   );
 };
