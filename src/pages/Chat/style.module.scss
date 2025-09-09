@@ -3,7 +3,7 @@
 .Main {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 150px);
+  height: calc(100dvh - 200px);
   width: 100%;
   background-color: $color-white;
   position: relative;
