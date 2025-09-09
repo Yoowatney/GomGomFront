@@ -1,15 +1,24 @@
 @import '../../../styles/animation.scss';
 @import '../../../styles/color.scss';
 
+.A {
+  height: 80dvh;
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 .Layout {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 30px;
-  padding: 50px 10px;
+  gap: 20px;
+  padding: 10px;
   text-align: center;
   width: 100%;
+  min-height: 100%;
 }
 
 .AnswerInfo {
