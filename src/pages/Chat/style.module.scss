@@ -3,10 +3,11 @@
 .Main {
   display: flex;
   flex-direction: column;
-  height: calc(100dvh - 200px);
+  height: calc(100dvh - 150px);
   width: 100%;
   background-color: $color-white;
   position: relative;
+  gap: 10px;
 }
 
 .Chat {
