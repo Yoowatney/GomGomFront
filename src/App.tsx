@@ -4,6 +4,7 @@ import { Outlet } from 'react-router-dom';
 
 import Ad from './Ad';
 import Style from './App.module.scss';
+import FallingLeaves from './components/FallingLeaves';
 import Header from './components/Header';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
 
   return (
     <div className={Style.AppContent}>
+      <FallingLeaves />
       <Header />
       <main className={Style.MainContent}>
         <Outlet />
