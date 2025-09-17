@@ -1,6 +1,6 @@
 import { AxiosError } from 'axios';
 import { useAtom, useAtomValue } from 'jotai';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { getQuestionInfo, postAnswer } from '@/api/Answer/answer';
@@ -150,6 +150,8 @@ const WriteAnswer = () => {
       return newAnswers;
     });
 
+    updateSpeechBubble();
+
     if (currentQuestionIdx < questionNum - 1) {
       setCurrentQuestionIdx((prevIdx) => prevIdx + 1);
     } else {
@@ -167,6 +169,8 @@ const WriteAnswer = () => {
   };
 
   const handlePrevious = () => {
+    updateSpeechBubble();
+
     if (currentQuestionIdx > 0) {
       setAnswerArr((prevAnswers) => {
         const newAnswers = [...prevAnswers];
@@ -181,6 +185,8 @@ const WriteAnswer = () => {
 
   const handleSkip = () => {
     const skipText = '생략했어요.';
+
+    updateSpeechBubble(); // 말풍선 문구 변경
 
     setAnswerArr((prevAnswers) => {
       const newAnswers = [...prevAnswers];
@@ -205,6 +211,34 @@ const WriteAnswer = () => {
     }
   };
 
+  const getRandomMessage = useCallback(
+    (progress: number) => {
+      if (progress >= 100) {
+        return '완성!';
+      }
+
+      const messages = [
+        '추억을 쌓는 중',
+        '계속 써달라곰!',
+        `${answerer}의 답장 기대된다곰!`,
+      ];
+      return messages[Math.floor(Math.random() * messages.length)];
+    },
+    [answerer],
+  );
+
+  const [speechBubbleMessage, setSpeechBubbleMessage] = useState(() =>
+    getRandomMessage(0),
+  );
+
+  const updateSpeechBubble = () => {
+    setSpeechBubbleMessage(getRandomMessage(calculateProgress));
+  };
+
+  useEffect(() => {
+    setSpeechBubbleMessage(getRandomMessage(calculateProgress));
+  }, [calculateProgress, answerer, getRandomMessage]);
+
   return (
     <div className={Style.Layout}>
       <div className={Style.ProgressBar}>
@@ -212,13 +246,25 @@ const WriteAnswer = () => {
           className={Style.Progress}
           style={{ width: `${calculateProgress}%` }}
         />
-        <span className={Style.ProgressText}>{Math.round(calculateProgress)}%</span>
-        <span
-          className={`${Style.BearEmoji} ${calculateProgress >= 100 ? Style.shake : ''}`}
+        <span className={Style.ProgressText}>
+          {Math.round(calculateProgress)}%
+        </span>
+        <div
+          className={`${Style.BearWrapper} ${calculateProgress >= 100 ? Style.shake : ''}`}
           style={{ left: `${calculateProgress}%` }}
         >
-          🐻
-        </span>
+          <ABTestContainer
+            testName="bear_speech_bubble"
+            proportionB={50}
+            variantA={<span className={Style.BearEmoji}>🐻</span>}
+            variantB={
+              <>
+                <div className={Style.SpeechBubble}>{speechBubbleMessage}</div>
+                <span className={Style.BearEmoji}>🐻</span>
+              </>
+            }
+          />
+        </div>
         <span className={Style.HoneyEmoji}>🍯</span>
       </div>
       <div className={Style.QuestionWrapper}>

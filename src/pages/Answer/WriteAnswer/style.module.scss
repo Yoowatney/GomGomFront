@@ -37,34 +37,60 @@
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
 }
 
-.BearEmoji {
+.BearWrapper {
   position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 30px;
+  top: 0;
+  transform: translate(-50%, -60%);
   transition: left 0.5s ease-in-out;
-  z-index: 10;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.BearEmoji.shake {
+.BearWrapper.shake {
   animation: shake 0.5s ease-in-out infinite;
+}
+
+.BearEmoji {
+  font-size: 30px;
+}
+
+.SpeechBubble {
+  position: relative;
+  background-color: white;
+  border: 2px solid $color-point;
+  border-radius: 15px;
+  padding: 6px;
+  font-size: 12px;
+  font-weight: bold;
+  color: $color-point;
+  white-space: nowrap;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.SpeechBubble::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid $color-point;
 }
 
 @keyframes shake {
   0% {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-  25% {
-    transform: translate(-50%, -50%) rotate(-5deg);
+    transform: translate(-50%, -60%) rotate(-10deg);
   }
   50% {
-    transform: translate(-50%, -50%) rotate(5deg);
-  }
-  75% {
-    transform: translate(-50%, -50%) rotate(-5deg);
+    transform: translate(-50%, -60%) rotate(10deg);
   }
   100% {
-    transform: translate(-50%, -50%) rotate(0deg);
+    transform: translate(-50%, -60%) rotate(-10deg);
   }
 }
 
