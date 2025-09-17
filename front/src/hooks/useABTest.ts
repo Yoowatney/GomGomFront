@@ -24,7 +24,6 @@ export const useABTest = ({ testName, proportionB }: IABTestConfig) => {
       setGroup(assignedGroup);
       setCookie(cookieName, assignedGroup);
 
-      // GA 이벤트 전송
       EventTrigger({
         action: 'ab_test_assignment',
         category: 'experiment',

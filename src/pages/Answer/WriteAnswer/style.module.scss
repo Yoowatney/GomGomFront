@@ -39,13 +39,18 @@
 
 .BearWrapper {
   position: absolute;
-  top: 0;
-  transform: translate(-50%, -60%);
+  top: 0%;
+  transform: translate(-50%, -30%);
   transition: left 0.5s ease-in-out;
   z-index: 20;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.BearWrapper:has(.SpeechBubble) {
+  top: 0;
+  transform: translate(-50%, -60%);
 }
 
 .BearWrapper.shake {
@@ -83,6 +88,22 @@
 }
 
 @keyframes shake {
+  0% {
+    transform: translate(-50%, -30%) rotate(-10deg);
+  }
+  50% {
+    transform: translate(-50%, -30%) rotate(10deg);
+  }
+  100% {
+    transform: translate(-50%, -30%) rotate(-10deg);
+  }
+}
+
+.BearWrapper:has(.SpeechBubble).shake {
+  animation: shake-with-bubble 0.5s ease-in-out infinite;
+}
+
+@keyframes shake-with-bubble {
   0% {
     transform: translate(-50%, -60%) rotate(-10deg);
   }
