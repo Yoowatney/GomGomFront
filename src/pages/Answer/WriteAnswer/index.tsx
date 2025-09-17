@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { getQuestionInfo, postAnswer } from '@/api/Answer/answer';
+import ABTestContainer from '@/components/ABTest';
 import AnswerReviewList from '@/components/AnswerPreview';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
@@ -211,6 +212,14 @@ const WriteAnswer = () => {
           className={Style.Progress}
           style={{ width: `${calculateProgress}%` }}
         />
+        <span className={Style.ProgressText}>{Math.round(calculateProgress)}%</span>
+        <span
+          className={`${Style.BearEmoji} ${calculateProgress >= 100 ? Style.shake : ''}`}
+          style={{ left: `${calculateProgress}%` }}
+        >
+          🐻
+        </span>
+        <span className={Style.HoneyEmoji}>🍯</span>
       </div>
       <div className={Style.QuestionWrapper}>
         <div className={Style.QuestionNum}>
@@ -242,9 +251,20 @@ const WriteAnswer = () => {
         <Button color="default" onClick={handleNextQuestion}>
           {'>> 다음으로'}
         </Button>
-        <Button color="grey" onClick={handleSkip}>
-          넘어가기
-        </Button>
+        <ABTestContainer
+          testName="skip_button_text"
+          proportionB={50}
+          variantA={
+            <Button color="grey" onClick={handleSkip}>
+              넘어가기
+            </Button>
+          }
+          variantB={
+            <Button color="grey" onClick={handleSkip}>
+              자동 답변하기
+            </Button>
+          }
+        />
       </div>
 
       {isOpen && modalContent && (
