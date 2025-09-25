@@ -1,6 +1,7 @@
 import _debounce from 'lodash/debounce';
 import { useEffect, useState } from 'react';
 
+import { EventTrigger } from '../../util/ga-helper';
 import { ConfettiEffect } from '../Confetti';
 import Style from './style.module.scss';
 
@@ -15,6 +16,12 @@ const StepEmoji = (props: Props) => {
 
   const handleMouseMove = _debounce(() => {
     setIsActive(true);
+    EventTrigger({
+      action: '답장 페이지: 이모지 호버',
+      category: 'step_emoji',
+      label: '답장 페이지: 이모지 호버',
+      value: 1,
+    });
   }, 100);
 
   const handleMouseLeave = _debounce(() => {
