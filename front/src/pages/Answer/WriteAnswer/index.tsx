@@ -253,17 +253,8 @@ const WriteAnswer = () => {
           className={`${Style.BearWrapper} ${calculateProgress >= 100 ? Style.shake : ''}`}
           style={{ left: `${calculateProgress}%` }}
         >
-          <ABTestContainer
-            testName="bear_speech_bubble"
-            proportionB={50}
-            variantA={<span className={Style.BearEmoji}>🐻</span>}
-            variantB={
-              <>
-                <div className={Style.SpeechBubble}>{speechBubbleMessage}</div>
-                <span className={Style.BearEmoji}>🐻</span>
-              </>
-            }
-          />
+          <div className={Style.SpeechBubble}>{speechBubbleMessage}</div>
+          <span className={Style.BearEmoji}>🐻</span>
         </div>
         <span className={Style.HoneyEmoji}>🍯</span>
       </div>
