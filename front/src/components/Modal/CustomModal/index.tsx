@@ -30,7 +30,7 @@ const CustomModal = (props: Props): ReactElement => {
   };
 
   return (
-    <ModalPortal onClose={onConfirm}>
+    <ModalPortal onClose={onCancel}>
       <div className={Style.Layout}>
         <div className={Style.Title}>{title}</div>
         {description && <div className={Style.Desc}>{description}</div>}
