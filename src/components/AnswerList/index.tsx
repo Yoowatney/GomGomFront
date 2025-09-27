@@ -23,6 +23,7 @@ import { handleShareLink } from '@/util/share-helper';
 import AnswererList from '../AnswererList';
 import Button from '../Button';
 import EmptyAnswerList from '../EmptyAnswerList';
+import Fortune from '../Fortune';
 import CustomModal from '../Modal/CustomModal';
 import Pagination from '../Pagination';
 import SortOrderSelect from '../SortOrderSelect';
@@ -169,6 +170,7 @@ const AnswerListSection = (props: IAnswerListSection) => {
 
   return (
     <div className={Style.Layout}>
+      <Fortune />
       <div className={Style.EmojiContainer}>
         <StepEmoji answererCount={answererCount} />
         <div className={Style.Title}>{answererCount}명이 질문에 답했다곰!</div>
