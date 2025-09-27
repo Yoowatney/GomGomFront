@@ -8,6 +8,12 @@ interface IFortuneData {
 interface IStoredIFortuneData extends IFortuneData {
   date: string;
   shouldShow: boolean;
+  hasViewed?: boolean;
+}
+
+interface IUserFortuneHistory {
+  lastVisitDate: string;
+  totalVisits: number;
 }
 
 const fortuneMessages = [
@@ -60,7 +66,7 @@ const fortuneMessages = [
     subMessage: '재밌는 이벤트나 놀 일이 생길 수 있어요.',
   },
   {
-    mainMessage: '오늘은 수다 파티하기 좋은 날이에요!',
+    mainMessage: '오늘은 친구랑 놀기 좋은 날이에요!',
     subMessage: '친구랑 얘기하다 보면 시간이 순삭될 거예요.',
   },
   {
@@ -169,6 +175,8 @@ const luckyItems = [
 ];
 
 const FORTUNE_STORAGE_KEY = 'daily_fortune';
+const FORTUNE_HISTORY_KEY = 'fortune_history';
+const FORTUNE_HIDDEN_KEY = 'fortune_hidden_until';
 
 const getTodayDateString = (): string => {
   return new Date().toISOString().split('T')[0];
@@ -193,6 +201,54 @@ const isIStoredIFortuneData = (data: unknown): data is IStoredIFortuneData => {
   );
 };
 
+const getFortuneHistory = (): IUserFortuneHistory => {
+  try {
+    const stored = localStorage.getItem(FORTUNE_HISTORY_KEY);
+    if (stored) {
+      const parsed = JSON.parse(stored) as IUserFortuneHistory;
+      return parsed;
+    }
+  } catch (error) {
+    console.error('Error reading fortune history:', error);
+  }
+  return { lastVisitDate: '', totalVisits: 0 };
+};
+
+const updateFortuneHistory = (): boolean => {
+  try {
+    const today = getTodayDateString();
+    const history = getFortuneHistory();
+
+    const isFirstVisit = history.totalVisits === 0;
+
+    if (history.lastVisitDate !== today) {
+      const updatedHistory: IUserFortuneHistory = {
+        lastVisitDate: today,
+        totalVisits: history.totalVisits + 1,
+      };
+      localStorage.setItem(FORTUNE_HISTORY_KEY, JSON.stringify(updatedHistory));
+    }
+
+    return isFirstVisit;
+  } catch (error) {
+    console.error('Error updating fortune history:', error);
+    return false;
+  }
+};
+
+const isFortuneHidden = (): boolean => {
+  try {
+    const hiddenUntil = localStorage.getItem(FORTUNE_HIDDEN_KEY);
+    if (hiddenUntil) {
+      const today = getTodayDateString();
+      return hiddenUntil >= today;
+    }
+  } catch (error) {
+    console.error('Error checking if fortune is hidden:', error);
+  }
+  return false;
+};
+
 const createNewFortune = (): IFortuneData => {
   const luckPercent = Math.floor(Math.random() * 101);
   const randomMessage =
@@ -213,25 +269,35 @@ export const getDailyFortune = (): {
   shouldShow: boolean;
 } => {
   try {
+    if (isFortuneHidden()) {
+      return {
+        fortune: null,
+        shouldShow: false,
+      };
+    }
+
     const stored = localStorage.getItem(FORTUNE_STORAGE_KEY);
     const today = getTodayDateString();
 
     if (stored) {
       const parsedData = JSON.parse(stored) as unknown;
       if (isIStoredIFortuneData(parsedData) && parsedData.date === today) {
+        const shouldShow = parsedData.shouldShow && !parsedData.hasViewed;
         return {
-          fortune: {
+          fortune: shouldShow ? {
             luckPercent: parsedData.luckPercent,
             mainMessage: parsedData.mainMessage,
             subMessage: parsedData.subMessage,
             luckyItem: parsedData.luckyItem,
-          },
-          shouldShow: parsedData.shouldShow,
+          } : null,
+          shouldShow,
         };
       }
     }
 
-    const shouldShow = Math.random() < 0.3;
+    const isFirstVisit = updateFortuneHistory();
+    const showProbability = isFirstVisit ? 1 : 0.3;
+    const shouldShow = Math.random() < showProbability;
     const newFortune = createNewFortune();
 
     const dataToStore: IStoredIFortuneData = {
@@ -267,5 +333,14 @@ export const markFortuneAsViewed = (): void => {
     }
   } catch (error) {
     console.error('Error marking fortune as viewed:', error);
+  }
+};
+
+export const hideFortuneForToday = (): void => {
+  try {
+    const today = getTodayDateString();
+    localStorage.setItem(FORTUNE_HIDDEN_KEY, today);
+  } catch (error) {
+    console.error('Error hiding fortune for today:', error);
   }
 };

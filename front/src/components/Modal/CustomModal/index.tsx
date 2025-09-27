@@ -12,10 +12,11 @@ interface Props {
   onCancel?: () => void;
   children?: ReactNode;
   confirmTitle?: string;
+  cancelTitle?: string;
 }
 
 const CustomModal = (props: Props): ReactElement => {
-  const { title, description, onConfirm, onCancel, children, confirmTitle } =
+  const { title, description, onConfirm, onCancel, children, confirmTitle, cancelTitle } =
     props;
 
   const handleConfirmClick = () => {
@@ -29,7 +30,7 @@ const CustomModal = (props: Props): ReactElement => {
   };
 
   return (
-    <ModalPortal onClose={onCancel || onConfirm}>
+    <ModalPortal onClose={onConfirm}>
       <div className={Style.Layout}>
         <div className={Style.Title}>{title}</div>
         {description && <div className={Style.Desc}>{description}</div>}
@@ -44,7 +45,7 @@ const CustomModal = (props: Props): ReactElement => {
               color="white"
               onClick={handleCancelClick}
             >
-              취소
+              {cancelTitle ?? '취소'}
             </Button>
           )}
         </div>

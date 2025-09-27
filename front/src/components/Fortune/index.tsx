@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
 
 import CustomModal from '../Modal/CustomModal';
-import { getDailyFortune, markFortuneAsViewed } from './fortuneData';
+import { getDailyFortune, hideFortuneForToday } from './fortuneData';
 import Style from './style.module.scss';
 
 const Fortune = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [hasViewed, setHasViewed] = useState(false);
   const [fortune, setFortune] = useState<{
     luckPercent: number;
     mainMessage: string;
@@ -21,7 +20,7 @@ const Fortune = () => {
     }
   }, []);
 
-  if (!fortune || hasViewed) {
+  if (!fortune) {
     return null;
   }
 
@@ -31,8 +30,11 @@ const Fortune = () => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    setHasViewed(true);
-    markFortuneAsViewed();
+  };
+
+  const handleHideForToday = () => {
+    setIsModalOpen(false);
+    hideFortuneForToday();
   };
 
   return (
@@ -44,7 +46,9 @@ const Fortune = () => {
         <CustomModal
           title="🍀 오늘의 운세"
           onConfirm={handleCloseModal}
+          onCancel={handleHideForToday}
           confirmTitle="확인"
+          cancelTitle="그만보기"
         >
           <div className={Style.FortuneContent}>
             <div className={Style.LuckContainer}>
