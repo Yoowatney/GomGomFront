@@ -16,8 +16,15 @@ interface Props {
 }
 
 const CustomModal = (props: Props): ReactElement => {
-  const { title, description, onConfirm, onCancel, children, confirmTitle, cancelTitle } =
-    props;
+  const {
+    title,
+    description,
+    onConfirm,
+    onCancel,
+    children,
+    confirmTitle,
+    cancelTitle,
+  } = props;
 
   const handleConfirmClick = () => {
     onConfirm();
@@ -30,7 +37,7 @@ const CustomModal = (props: Props): ReactElement => {
   };
 
   return (
-    <ModalPortal onClose={onCancel}>
+    <ModalPortal onClose={onCancel || onConfirm}>
       <div className={Style.Layout}>
         <div className={Style.Title}>{title}</div>
         {description && <div className={Style.Desc}>{description}</div>}
