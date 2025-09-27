@@ -78,7 +78,6 @@ const Welcome = () => {
         label: '다이어리 만들기',
         value: 1,
       });
-      
     } else {
       openModal({
         title: '안내사항',
@@ -94,7 +93,14 @@ const Welcome = () => {
   return (
     <div className={Style.Layout}>
       <div className={Style.Title}>
-        <div className={Style.Logo}>🐻💭</div>
+        <div className={Style.Logo}>
+          <img
+            src="/image/gomgom/logo.png"
+            alt="곰곰 로고"
+            width={100}
+            height={100}
+          />
+        </div>
         <div>
           상대에 대해 곰곰이 생각하고
           <br />

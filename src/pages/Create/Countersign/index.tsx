@@ -110,7 +110,9 @@ const Countersign = () => {
   return (
     <div className={Style.Layout}>
       <div className={Style.Top}>
-        <div className={Style.Emoji}>🔑</div>
+        <div className={Style.Emoji}>
+          <img src="/image/gomgom/key.png" alt="열쇠" width={50} height={40} />
+        </div>
         <div className={Style.Title}>거의 다 왔다곰!</div>
         <div>
           <div>비밀 암호를 아는 사람만 답장할 수 있도록</div>

@@ -152,7 +152,14 @@ const MatchChallenge = () => {
   return (
     <div className={Style.Layout}>
       <div className={Style.Top}>
-        <div className={Style.Emoji}>🔒</div>
+        <div className={Style.Emoji}>
+          <img
+            src="/image/gomgom/lock.png"
+            alt="자물쇠"
+            width={30}
+            height={40}
+          />
+        </div>
         <div className={Style.Title}>
           <span className={Style.Questioner}>{questioner}</span>님의 다이어리를
           <br />
