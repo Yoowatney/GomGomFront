@@ -139,14 +139,23 @@ const Question = () => {
           className={Style.Progress}
           style={{ width: `${calculateProgress}%` }}
         />
-        <span className={Style.ProgressText}>{Math.round(calculateProgress)}%</span>
+        <span className={Style.ProgressText}>
+          {Math.round(calculateProgress)}%
+        </span>
         <span
           className={`${Style.BearEmoji} ${calculateProgress >= 100 ? Style.shake : ''}`}
           style={{ left: `${calculateProgress}%` }}
         >
-          🐻
+          <img
+            src="/image/gomgom/normal_gom.png"
+            alt="곰"
+            width={40}
+            height={40}
+          />
         </span>
-        <span className={Style.HoneyEmoji}>🍯</span>
+        <span className={Style.HoneyEmoji}>
+          <img src="/image/gomgom/honey.png" alt="꿀" width={35} height={40} />
+        </span>
       </div>
       <div className={Style.QuestionWrapper}>
         <div className={Style.QuestionNum}>

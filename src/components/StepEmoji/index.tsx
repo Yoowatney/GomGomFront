@@ -84,7 +84,18 @@ const StepEmoji = (props: Props) => {
       onMouseLeave={handleMouseLeave}
     >
       <div>
-        <div className={Style.Emoji}>{isActive ? DisplayEmoji() : '📫'}</div>
+        <div className={Style.Emoji}>
+          {isActive ? (
+            DisplayEmoji()
+          ) : (
+            <img
+              src="/image/gomgom/mail_box.png"
+              alt="메일박스"
+              width={100}
+              height={80}
+            />
+          )}
+        </div>
         <div className={Style.Message}>
           {isActive ? DisplayMessage() : '답장 수에 따라 우체통이 달라진다곰!'}
         </div>

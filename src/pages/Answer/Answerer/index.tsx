@@ -64,7 +64,14 @@ const Answerer = () => {
   return (
     <div className={Style.Layout}>
       <div className={Style.Top}>
-        <div className={Style.Emoji}>🔒</div>
+        <div className={Style.Emoji}>
+          <img
+            src="/image/gomgom/normal_gom.png"
+            alt="곰"
+            width={100}
+            height={100}
+          />
+        </div>
         <div className={Style.Title}>
           <span className={Style.Questioner}>{questioner}</span>님에게
           <br />

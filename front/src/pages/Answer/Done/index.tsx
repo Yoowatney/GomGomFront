@@ -49,7 +49,14 @@ const Done = () => {
   return (
     <div className={Style.Layout}>
       <div className={Style.Top}>
-        <div className={Style.Emoji}>🎉</div>
+        <div className={Style.Emoji}>
+          <img
+            src="/image/gomgom/confetti.png"
+            alt="컨페티"
+            width={70}
+            height={90}
+          />
+        </div>
         <div className={Style.Title}>답장을 보냈어요!</div>
         <div>{questioner}님에게 알려보세요 :) </div>
       </div>

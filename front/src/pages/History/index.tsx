@@ -123,7 +123,14 @@ const History = () => {
   return (
     <div className={Style.Layout}>
       <div className={Style.Title}>
-        <div className={Style.Emoji}>📮</div>
+        <div className={Style.Emoji}>
+          <img
+            src="/image/gomgom/mail_box_red.png"
+            alt="우체통"
+            width={80}
+            height={70}
+          />
+        </div>
         <div className={Style.Desc}>
           저장된 다이어리를
           <br />

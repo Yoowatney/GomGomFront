@@ -18,7 +18,7 @@ interface IUserFortuneHistory {
 
 const fortuneMessages = [
   {
-    mainMessage: '오늘은 짝남/짝녀랑 눈이 마주칠 수도 있어요!',
+    mainMessage: '오늘은 짝남/짝녀랑 눈이 마주쳐요!',
     subMessage: '살짝 웃어보면 하루가 두근거릴 거예요.',
   },
   {
@@ -26,7 +26,7 @@ const fortuneMessages = [
     subMessage: '친구랑 얘기하면서 더 즐겁게 먹어보세요.',
   },
   {
-    mainMessage: '오늘은 숙제나 공부가 빨리 끝나는 날이에요!',
+    mainMessage: '오늘은 숙제나 공부가 빨리 끝나요!',
     subMessage: '얼른 끝내고 유튜브나 게임을 마음껏 즐겨보세요.',
   },
   {
@@ -284,12 +284,14 @@ export const getDailyFortune = (): {
       if (isIStoredIFortuneData(parsedData) && parsedData.date === today) {
         const shouldShow = parsedData.shouldShow && !parsedData.hasViewed;
         return {
-          fortune: shouldShow ? {
-            luckPercent: parsedData.luckPercent,
-            mainMessage: parsedData.mainMessage,
-            subMessage: parsedData.subMessage,
-            luckyItem: parsedData.luckyItem,
-          } : null,
+          fortune: shouldShow
+            ? {
+                luckPercent: parsedData.luckPercent,
+                mainMessage: parsedData.mainMessage,
+                subMessage: parsedData.subMessage,
+                luckyItem: parsedData.luckyItem,
+              }
+            : null,
           shouldShow,
         };
       }

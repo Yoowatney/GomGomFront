@@ -55,6 +55,7 @@ const WriteAnswer = () => {
   const currentQuestion = questionArr[currentQuestionIdx];
 
   const [answer, setAnswer] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     if (questionArr.length > 0 && currentQuestionIdx < questionArr.length) {
@@ -72,10 +73,16 @@ const WriteAnswer = () => {
   const answerInputRef = useRef<HTMLInputElement>(null);
 
   const submitFinalAnswers = async (finalAnswers: string[]) => {
+    if (isSubmitting) {
+      return;
+    }
+
+    setIsSubmitting(true);
     closeModal();
 
     if (!diaryAddress) {
       console.error('다이어리 주소가 없습니다.');
+      setIsSubmitting(false);
       return;
     }
 
@@ -96,6 +103,7 @@ const WriteAnswer = () => {
         });
       }
     } catch (e) {
+      setIsSubmitting(false);
       if (e instanceof AxiosError) {
         if (e.status === 409) {
           openModal({
@@ -254,9 +262,18 @@ const WriteAnswer = () => {
           style={{ left: `${calculateProgress}%` }}
         >
           <div className={Style.SpeechBubble}>{speechBubbleMessage}</div>
-          <span className={Style.BearEmoji}>🐻</span>
+          <span className={Style.BearEmoji}>
+            <img
+              src="/image/gomgom/normal_gom.png"
+              alt="곰"
+              width={40}
+              height={40}
+            />
+          </span>
         </div>
-        <span className={Style.HoneyEmoji}>🍯</span>
+        <span className={Style.HoneyEmoji}>
+          <img src="/image/gomgom/honey.png" alt="꿀" width={35} height={40} />
+        </span>
       </div>
       <div className={Style.QuestionWrapper}>
         <div className={Style.QuestionNum}>

@@ -40,7 +40,7 @@ const Fortune = () => {
   return (
     <>
       <div className={Style.FortuneIcon} onClick={handleFortuneClick}>
-        🍀
+        <img src="/image/gomgom/clover.png" alt="운세" width={30} height={30} />
       </div>
       {isModalOpen && (
         <CustomModal

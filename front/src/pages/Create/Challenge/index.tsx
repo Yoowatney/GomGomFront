@@ -21,7 +21,7 @@ const Challenge = () => {
       value: 1,
     });
   }, []);
-  
+
   const [challenge, setChallenge] = useAtom(challengeAtom);
   const [, setIsWritten] = useState(false);
   const navigate = useNavigate();
@@ -50,7 +50,14 @@ const Challenge = () => {
   return (
     <div className={Style.Layout}>
       <div className={Style.Top}>
-        <div className={Style.Emoji}>🔒</div>
+        <div className={Style.Emoji}>
+          <img
+            src="/image/gomgom/lock.png"
+            alt="자물쇠"
+            width={30}
+            height={40}
+          />
+        </div>
         <div className={Style.Title}>모든 질문이 완성됐다곰!</div>
         <div>
           <div>비밀 암호를 정했다면 상대가 맞출 수 있게</div>

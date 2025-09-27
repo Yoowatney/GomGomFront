@@ -14,10 +14,12 @@ const ModalPortal = (props: Props) => {
   const modal = document.getElementById('modal')!;
   return createPortal(
     <div className={Style.Backdrop} onClick={onClose}>
-      {children}
+      <div onClick={(e) => e.stopPropagation()}>
+        {children}
+      </div>
     </div>,
     modal,
-  ); 
+  );
 };
 
 export default ModalPortal;

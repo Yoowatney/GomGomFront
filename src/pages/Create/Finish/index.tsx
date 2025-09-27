@@ -91,7 +91,14 @@ const Finish = () => {
   return (
     <div className={Style.Layout}>
       <div className={Style.Top}>
-        <div className={Style.Emoji}>🎉</div>
+        <div className={Style.Emoji}>
+          <img
+            src="/image/gomgom/confetti.png"
+            alt="컨페티"
+            width={70}
+            height={90}
+          />
+        </div>
         <div className={Style.Title}>곰곰 다이어리가 완성됐다곰!</div>
         <div>친구들에게 공유해 답장을 모아보세요!</div>
       </div>
