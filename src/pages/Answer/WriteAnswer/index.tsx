@@ -55,6 +55,7 @@ const WriteAnswer = () => {
   const currentQuestion = questionArr[currentQuestionIdx];
 
   const [answer, setAnswer] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     if (questionArr.length > 0 && currentQuestionIdx < questionArr.length) {
@@ -72,10 +73,16 @@ const WriteAnswer = () => {
   const answerInputRef = useRef<HTMLInputElement>(null);
 
   const submitFinalAnswers = async (finalAnswers: string[]) => {
+    if (isSubmitting) {
+      return;
+    }
+
+    setIsSubmitting(true);
     closeModal();
 
     if (!diaryAddress) {
       console.error('다이어리 주소가 없습니다.');
+      setIsSubmitting(false);
       return;
     }
 
@@ -96,6 +103,7 @@ const WriteAnswer = () => {
         });
       }
     } catch (e) {
+      setIsSubmitting(false);
       if (e instanceof AxiosError) {
         if (e.status === 409) {
           openModal({
