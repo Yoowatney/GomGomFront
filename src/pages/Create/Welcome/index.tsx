@@ -67,6 +67,12 @@ const Welcome = () => {
       cancelTitle: '닫기',
       verticalButtons: true,
       onConfirmCallback: () => {
+        EventTrigger({
+          action: '메인페이지_이벤트모달_보러가기',
+          category: 'event_modal',
+          label: '메인페이지_이벤트모달_보러가기',
+          value: 1,
+        });
         window.location.href =
           'https://www.instagram.com/p/DPLOIl6kui3/?utm_source=ig_web_copy_link';
       },
