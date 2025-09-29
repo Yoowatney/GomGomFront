@@ -33,6 +33,13 @@
 
 .Buttons {
   display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: center;
+}
+
+.VerticalButtons {
+  flex-direction: column;
   gap: 5px;
 }
 
