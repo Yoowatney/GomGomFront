@@ -13,6 +13,7 @@ interface Props {
   children?: ReactNode;
   confirmTitle?: string;
   cancelTitle?: string;
+  verticalButtons?: boolean;
 }
 
 const CustomModal = (props: Props): ReactElement => {
@@ -24,6 +25,7 @@ const CustomModal = (props: Props): ReactElement => {
     children,
     confirmTitle,
     cancelTitle,
+    verticalButtons,
   } = props;
 
   const handleConfirmClick = () => {
@@ -42,7 +44,7 @@ const CustomModal = (props: Props): ReactElement => {
         <div className={Style.Title}>{title}</div>
         {description && <div className={Style.Desc}>{description}</div>}
         {children}
-        <div className={Style.Buttons}>
+        <div className={`${Style.Buttons} ${verticalButtons ? Style.VerticalButtons : ''}`}>
           <Button className={Style.ConfirmButton} onClick={handleConfirmClick}>
             {confirmTitle ?? '확인'}
           </Button>

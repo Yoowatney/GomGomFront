@@ -86,8 +86,10 @@ const AnswerList = () => {
       ),
       confirmTitle: '보러가기',
       cancelTitle: '닫기',
+      verticalButtons: true,
       onConfirmCallback: () => {
-        window.location.href = 'https://www.instagram.com/p/DPLOIl6kui3/?utm_source=ig_web_copy_link';
+        window.location.href =
+          'https://www.instagram.com/p/DPLOIl6kui3/?utm_source=ig_web_copy_link';
       },
       onCancelCallback: () => {
         closeModal();
@@ -235,6 +237,7 @@ const AnswerList = () => {
           onCancel={modalContent.onCancelCallback}
           confirmTitle={modalContent.confirmTitle}
           cancelTitle={modalContent.cancelTitle}
+          verticalButtons={modalContent.verticalButtons}
         />
       )}
     </div>

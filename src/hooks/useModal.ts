@@ -7,6 +7,7 @@ interface ModalContent {
   children?: ReactNode;
   confirmTitle?: string;
   cancelTitle?: string;
+  verticalButtons?: boolean;
 }
 
 interface IModalReturn {
