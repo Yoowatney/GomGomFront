@@ -5,6 +5,8 @@ interface ModalContent {
   onConfirmCallback: () => void;
   onCancelCallback?: () => void;
   children?: ReactNode;
+  confirmTitle?: string;
+  cancelTitle?: string;
 }
 
 interface IModalReturn {

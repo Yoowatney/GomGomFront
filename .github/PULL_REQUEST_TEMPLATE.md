@@ -9,7 +9,7 @@
 
 ### 반영 브랜치
 
-ex) feature/login -> dev
+ex) feat/login -> dev
 
 ### 변경사항
 

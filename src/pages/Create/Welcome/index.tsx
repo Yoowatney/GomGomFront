@@ -27,6 +27,58 @@ const Welcome = () => {
   const localDiaryUser = localStorage.getItem('diaryUser');
 
   useEffect(() => {
+    const today = new Date().toDateString();
+    const hideEventModalUntil = localStorage.getItem('hideEventModalUntil');
+
+    if (hideEventModalUntil === today) {
+      return;
+    }
+
+    const handleHideToday = () => {
+      localStorage.setItem('hideEventModalUntil', today);
+      closeModal();
+    };
+
+    openModal({
+      title: '🎉 이벤트가 진행중이라곰!',
+      children: (
+        <div style={{ textAlign: 'center' }}>
+          <img
+            src="/image/event/share_event.webp"
+            alt="이벤트 이미지"
+            style={{ width: '100%', maxWidth: '300px' }}
+          />
+          <div
+            onClick={handleHideToday}
+            style={{
+              marginTop: '8px',
+              color: '#999',
+              fontSize: '12px',
+              cursor: 'pointer',
+              userSelect: 'none',
+              textAlign: 'right',
+            }}
+          >
+            오늘은 그만보기
+          </div>
+        </div>
+      ),
+      confirmTitle: '보러가기',
+      cancelTitle: '닫기',
+      onConfirmCallback: () => {
+        window.open(
+          'https://www.instagram.com/p/DPLOIl6kui3/?utm_source=ig_web_copy_link',
+          '_blank',
+        );
+        closeModal();
+      },
+      onCancelCallback: () => {
+        closeModal();
+      },
+    });
+  }, []);
+
+  useEffect(() => {
     // 쿠키에 있는 값이 로컬 스토리지로, 로컬 스토리지에 있는 값이 쿠키로 이동
     if (diaryAddress || diaryUser) {
       localStorage.setItem('diaryAddress', diaryAddress ?? '');
@@ -140,6 +192,8 @@ const Welcome = () => {
             }
           }}
           onCancel={modalContent.onCancelCallback}
+          confirmTitle={modalContent.confirmTitle}
+          cancelTitle={modalContent.cancelTitle}
         />
       )}
     </div>
