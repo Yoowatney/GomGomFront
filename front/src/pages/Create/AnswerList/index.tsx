@@ -87,11 +87,7 @@ const AnswerList = () => {
       confirmTitle: '보러가기',
       cancelTitle: '닫기',
       onConfirmCallback: () => {
-        window.open(
-          'https://www.instagram.com/p/DPLOIl6kui3/?utm_source=ig_web_copy_link',
-          '_blank',
-        );
-        closeModal();
+        window.location.href = 'https://www.instagram.com/p/DPLOIl6kui3/?utm_source=ig_web_copy_link';
       },
       onCancelCallback: () => {
         closeModal();
