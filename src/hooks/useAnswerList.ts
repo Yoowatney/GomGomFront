@@ -53,6 +53,7 @@ const useAnswerList = (
 
   const totalPages: number = Math.ceil(answererCount / itemsPerPage);
   const pageRange: number = 5;
+  const start: number = (currentPage - 1) * itemsPerPage;
 
   const [error, setError] = useState<string | null>(null);
 
@@ -77,7 +78,6 @@ const useAnswerList = (
   }, []);
 
   useEffect(() => {
-    const start: number = (currentPage - 1) * itemsPerPage;
     axiosInstance
       .get<{ answererList: Answerer[]; answerCount: number }>(
         `diary/answerers/${diaryId}/?start=${start}&take=${itemsPerPage}&sortOrder=${sortOrder}`,
@@ -93,7 +93,7 @@ const useAnswerList = (
         console.error('Failed to fetch answerers:', e);
         setIsConnected(false);
       });
-  }, [axiosInstance, currentPage, diaryId, itemsPerPage, sortOrder]);
+  }, [axiosInstance, currentPage, diaryId, itemsPerPage, sortOrder, start]);
 
   const handlePageClick = useCallback(
     (pageNumber: number): void => {
@@ -216,6 +216,7 @@ const useAnswerList = (
     chatOwnerRequired,
     resetChatOwnerRequired,
     handleOpenChat,
+    start,
   };
 };
 

@@ -41,6 +41,7 @@ const AnswerList = () => {
     chatOwnerRequired,
     resetChatOwnerRequired,
     handleOpenChat,
+    start,
   } = useAnswerList(diaryAddress ?? '');
 
   const handleModalConfirm = useCallback(() => {
@@ -225,6 +226,7 @@ const AnswerList = () => {
             sortOrder={sortOrder}
             isDiaryOwner={isDiaryOwner}
             error={error}
+            start={start}
           />
         </>
       ) : (

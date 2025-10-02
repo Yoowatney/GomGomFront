@@ -32,11 +32,20 @@ import Style from './style.module.scss';
 
 const AnswerListSection = (props: IAnswerListSection) => {
   const {
+    answererList,
     answererCount,
     isDiaryOwner,
     sortOrder,
     handleSelectSortOrder,
-    ...rest
+    start,
+    diaryId,
+    correctAnswerer,
+    handleDisplayResponse,
+    handleOpenChat,
+    currentPage,
+    totalPages,
+    handlePageClick,
+    generatePageNumbers,
   } = props;
 
   const navigate = useNavigate();
@@ -180,8 +189,22 @@ const AnswerListSection = (props: IAnswerListSection) => {
           sortOrder={sortOrder}
           onSortOrderChange={handleSelectSortOrder}
         />
-        <AnswererList {...rest} />
-        <Pagination {...rest} />
+        <AnswererList
+          answererList={answererList}
+          answererCount={answererCount}
+          sortOrder={sortOrder}
+          start={start}
+          diaryId={diaryId}
+          correctAnswerer={correctAnswerer}
+          handleDisplayResponse={handleDisplayResponse}
+          handleOpenChat={handleOpenChat}
+        />
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          handlePageClick={handlePageClick}
+          generatePageNumbers={generatePageNumbers}
+        />
       </div>
       {isViewingMyDiary && (
         <>

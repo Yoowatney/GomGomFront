@@ -39,6 +39,7 @@ interface IAnswerListSection {
   sortOrder: 'desc' | 'asc';
   isDiaryOwner: boolean;
   error: string | null;
+  start: number;
   generatePageNumbers: () => number[];
   handleSelectSortOrder: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   handlePageClick: (pageNumber: number) => void;
