@@ -50,4 +50,28 @@ const getChatIcon = (props: IChatIcon): string | null => {
   return null;
 };
 
-export { getChatIcon, getClassNameForAnswerer };
+// 답장 단계별 기준점 (StepEmoji와 동일)
+const MILESTONE_REQUIREMENTS = [
+  3, 5, 7, 9, 11, 13, 15, 17, 19, 25, 30, 40, 55, 75, 99,
+];
+
+/**
+ * 현재 답장 개수 이하의 기준점 중 가장 큰 값을 찾습니다.
+ * @param answererCount 총 답장 개수
+ * @returns 가장 최근 달성한 기준점, 없으면 null
+ */
+const getLatestMilestone = (answererCount: number): number | null => {
+  for (let i = MILESTONE_REQUIREMENTS.length - 1; i >= 0; i--) {
+    if (answererCount >= MILESTONE_REQUIREMENTS[i]) {
+      return MILESTONE_REQUIREMENTS[i];
+    }
+  }
+  return null;
+};
+
+export {
+  getChatIcon,
+  getClassNameForAnswerer,
+  getLatestMilestone,
+  MILESTONE_REQUIREMENTS,
+};

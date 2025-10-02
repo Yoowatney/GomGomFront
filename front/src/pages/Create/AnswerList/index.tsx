@@ -8,6 +8,7 @@ import useAnswerList from '@/hooks/useAnswerList';
 import useDiaryOwnerStatus from '@/hooks/useDiaryOwnerStatus';
 import { useModal } from '@/hooks/useModal';
 import { getCookie } from '@/util/cookie-helper';
+import { EventTrigger } from '@/util/ga-helper';
 
 import Style from './style.module.scss';
 
@@ -40,6 +41,7 @@ const AnswerList = () => {
     chatOwnerRequired,
     resetChatOwnerRequired,
     handleOpenChat,
+    start,
   } = useAnswerList(diaryAddress ?? '');
 
   const handleModalConfirm = useCallback(() => {
@@ -88,6 +90,12 @@ const AnswerList = () => {
       cancelTitle: '닫기',
       verticalButtons: true,
       onConfirmCallback: () => {
+        EventTrigger({
+          action: '답장리스트페이지_이벤트모달_보러가기',
+          category: 'event_modal',
+          label: '답장리스트페이지_이벤트모달_보러가기',
+          value: 1,
+        });
         window.location.href =
           'https://www.instagram.com/p/DPLOIl6kui3/?utm_source=ig_web_copy_link';
       },
@@ -218,6 +226,7 @@ const AnswerList = () => {
             sortOrder={sortOrder}
             isDiaryOwner={isDiaryOwner}
             error={error}
+            start={start}
           />
         </>
       ) : (
