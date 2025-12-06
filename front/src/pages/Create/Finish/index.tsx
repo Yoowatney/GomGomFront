@@ -62,7 +62,7 @@ const Finish = () => {
       title: '곰곰 다이어리',
       description: '상대에 대해 곰곰이 생각하고 답해보세요!',
       imageUrl: `${window.location.origin}/image/thumbnail/OG_Thumb.png`,
-      location: window.location.href,
+      location: window.location.origin,
       diaryAddress: diaryAddress,
     });
   };
