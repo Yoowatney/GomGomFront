@@ -1,10 +1,11 @@
+// import FallingLeaves from './components/FallingLeaves';
+import { Analytics } from '@vercel/analytics/react';
 import { useEffect } from 'react';
 import ReactGA from 'react-ga4';
 import { Outlet } from 'react-router-dom';
 
 import Ad from './Ad';
 import Style from './App.module.scss';
-import FallingLeaves from './components/FallingLeaves';
 import Header from './components/Header';
 
 function App() {
@@ -16,7 +17,7 @@ function App() {
 
   return (
     <div className={Style.AppContent}>
-      <FallingLeaves />
+      {/* <FallingLeaves /> */}
       <Header />
       <main className={Style.MainContent}>
         <Outlet />
@@ -24,6 +25,7 @@ function App() {
       <div className={Style.Ad}>
         <Ad unit={'DAN-ZGJjaUD6AoC29nFb'} width={320} height={50} />
       </div>
+      <Analytics />
     </div>
   );
 }

@@ -11,7 +11,7 @@ export const setCookie = (name: string, value: string): void => {
 };
 
 export const getCookie = (name: string): string | undefined => {
-  return cookies.get(name) as string | undefined;
+  return cookies.get(name, { doNotParse: true }) as string | undefined;
 };
 
 export const removeCookie = (name: string): void => {
