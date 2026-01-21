@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import ReactGA from 'react-ga4';
 import { Outlet } from 'react-router-dom';
 
+import Ad from './Ad';
 import Style from './App.module.scss';
 import Header from './components/Header';
 
@@ -21,6 +22,9 @@ function App() {
       <main className={Style.MainContent}>
         <Outlet />
       </main>
+      <div className={Style.Ad}>
+        <Ad unit={'DAN-ZGJjaUD6AoC29nFb'} width={320} height={50} />
+      </div>
       <Analytics />
     </div>
   );
