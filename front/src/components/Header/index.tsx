@@ -3,10 +3,16 @@ import { MdOutlineHistory } from 'react-icons/md';
 import { RiMenuLine } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
 
-import { GOMGOM_HOMEPAGE_URL, GOMGOM_INSTA_URL } from '@/constant/url';
+import { GOMGOM_INSTA_URL } from '@/constant/url';
 import { EventTrigger } from '@/util/ga-helper';
 
 import Style from './style.module.scss';
+
+interface DropdownOption {
+  label: string;
+  value: string;
+  isExternal?: boolean;
+}
 
 const Header = (): ReactElement => {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,29 +40,30 @@ const Header = (): ReactElement => {
     };
   }, []);
 
-  const dropdownOptions = [
-    { label: '곰곰 다이어리 인스타그램', value: GOMGOM_INSTA_URL },
-    { label: '곰곰 다이어리 홈페이지', value: GOMGOM_HOMEPAGE_URL },
+  const dropdownOptions: DropdownOption[] = [
+    { label: '서비스 소개', value: '/about' },
+    { label: '자주 묻는 질문', value: '/faq' },
+    { label: '곰곰 다이어리 인스타그램', value: GOMGOM_INSTA_URL, isExternal: true },
   ];
 
-  const handleOptionSelect = (value: string) => {
-    if (value === GOMGOM_INSTA_URL) {
+  const handleOptionSelect = (option: DropdownOption) => {
+    if (option.isExternal) {
       EventTrigger({
         action: '인스타그램 이동',
         category: 'header_menu',
         label: '곰곰 다이어리 인스타그램',
         value: 1,
       });
-    } else if (value === GOMGOM_HOMEPAGE_URL) {
+      window.open(option.value, '_blank');
+    } else {
       EventTrigger({
-        action: '홈페이지 이동',
+        action: `${option.label} 이동`,
         category: 'header_menu',
-        label: '곰곰 다이어리 홈페이지',
+        label: option.label,
         value: 1,
       });
+      void navigate(option.value);
     }
-
-    window.location.href = value;
     setIsOpen(false);
   };
 
@@ -75,7 +82,7 @@ const Header = (): ReactElement => {
           {dropdownOptions.map((option) => (
             <li
               key={option.value}
-              onClick={() => handleOptionSelect(option.value)}
+              onClick={() => handleOptionSelect(option)}
             >
               {option.label}
             </li>

@@ -15,13 +15,14 @@ const Ad = ({ unit, width, height }: AdProps) => {
     script.type = 'text/javascript';
     script.src = '//t1.daumcdn.net/kas/static/ba.min.js';
 
-    if (ins.current) {
-      ins.current.appendChild(script);
+    const insElement = ins.current;
+    if (insElement) {
+      insElement.appendChild(script);
     }
 
     return () => {
-      if (ins.current) {
-        ins.current.innerHTML = '';
+      if (insElement) {
+        insElement.innerHTML = '';
       }
     };
   }, []);
