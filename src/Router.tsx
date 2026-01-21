@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import App from './App';
+import About from './pages/About';
 import Answerer from './pages/Answer/Answerer';
 import Done from './pages/Answer/Done';
 import MatchChallenge from './pages/Answer/MatchChallenge';
@@ -14,6 +15,7 @@ import Finish from './pages/Create/Finish';
 import Question from './pages/Create/Question';
 import QuestionerNum from './pages/Create/QuestionNum';
 import Welcome from './pages/Create/Welcome';
+import FAQ from './pages/FAQ';
 import History from './pages/History';
 import HistoryItem from './pages/History/HistoryItem';
 import NotFound from './pages/NotFound/NotFound';
@@ -49,6 +51,8 @@ const router = createBrowserRouter([
       },
       { path: 'history', element: <History /> },
       { path: 'history/:historyItemId', element: <HistoryItem /> },
+      { path: 'about', element: <About /> },
+      { path: 'faq', element: <FAQ /> },
       { path: '/*', element: <NotFound /> },
     ],
   },
