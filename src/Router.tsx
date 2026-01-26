@@ -19,6 +19,7 @@ import FAQ from './pages/FAQ';
 import History from './pages/History';
 import HistoryItem from './pages/History/HistoryItem';
 import NotFound from './pages/NotFound/NotFound';
+import Privacy from './pages/Privacy';
 
 const router = createBrowserRouter([
   {
@@ -53,8 +54,14 @@ const router = createBrowserRouter([
       { path: 'history/:historyItemId', element: <HistoryItem /> },
       { path: 'about', element: <About /> },
       { path: 'faq', element: <FAQ /> },
-      { path: '/*', element: <NotFound /> },
+      { path: 'privacy', element: <Privacy /> },
     ],
+  },
+  // 404 페이지 - 광고 없음 (AdSense 정책 준수)
+  {
+    path: '*',
+    element: <App showAd={false} />,
+    children: [{ path: '*', element: <NotFound /> }],
   },
 ]);
 

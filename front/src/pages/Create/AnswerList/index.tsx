@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import AnswerListSection from '@/components/AnswerList';
 import CustomModal from '@/components/Modal/CustomModal';
 import { GOMGOM_HOMEPAGE_URL } from '@/constant/url';
+import { useAd } from '@/contexts/AdContext';
 import useAnswerList from '@/hooks/useAnswerList';
 import useDiaryOwnerStatus from '@/hooks/useDiaryOwnerStatus';
 import { useModal } from '@/hooks/useModal';
@@ -17,6 +18,7 @@ const AnswerList = () => {
   const isDiaryOwner = useDiaryOwnerStatus(diaryAddress ?? '');
   const correctAnswerer = getCookie('diaryAddress');
   const { openModal, isOpen, modalContent, closeModal } = useModal();
+  const { setShowAd } = useAd();
 
   const {
     answererList,
@@ -122,6 +124,13 @@ const AnswerList = () => {
       });
     }
   }, [chatNotAllow, openModal, closeModal, resetChatNotAllow]);
+
+  // 로딩 중이거나 빈 콘텐츠일 때 광고 숨김 (AdSense 정책 준수)
+  useEffect(() => {
+    const hasContent = isConnected && answererCount > 0;
+    setShowAd(hasContent);
+    return () => setShowAd(true); // 페이지 떠날 때 복원
+  }, [isConnected, answererCount, setShowAd]);
 
   useEffect(() => {
     if (error === 'UNAUTHORIZED') {
