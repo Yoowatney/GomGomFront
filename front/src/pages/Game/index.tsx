@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import CustomModal from '@/components/Modal/CustomModal';
 import { useGameScore } from '@/hooks/useGameScore';
 import type { HeartLevel } from '@/types/Game/types';
+import { getCookie } from '@/util/cookie-helper';
 
 import { HEARTS } from './engine/config';
 import HeartMergeGame from './HeartMergeGame';
@@ -13,6 +14,15 @@ const INTRO_MODAL_KEY = 'game_intro_dont_show';
 
 const Game = () => {
   const navigate = useNavigate();
+  const { diaryId, answerId } = useParams<{
+    diaryId: string;
+    answerId: string;
+  }>();
+
+  // 역할 판단: 쿠키의 diaryAddress와 URL의 diaryId 비교
+  const userDiaryAddress = getCookie('diaryAddress');
+  const role: 'owner' | 'answerer' =
+    userDiaryAddress === diaryId ? 'owner' : 'answerer';
 
   const isMuted = false;
   const [isGameOver, setIsGameOver] = useState(false);
@@ -22,7 +32,19 @@ const Game = () => {
   const [isIntroModalOpen, setIsIntroModalOpen] = useState(false);
   const [dontShowAgain, setDontShowAgain] = useState(false);
 
-  const { bestScore, saveScore, isNewRecord, resetNewRecord } = useGameScore();
+  const {
+    isLoading,
+    isNewRecord,
+    saveScore,
+    getMyBestScore,
+    getOpponentBestScore,
+    getMyNickname,
+    getOpponentNickname,
+  } = useGameScore({
+    diaryId: diaryId ?? '',
+    answerId: answerId ?? '',
+    role,
+  });
 
   // 진입 시 인트로 모달 표시 (다시 보지 않기 체크 안 했을 경우)
   useEffect(() => {
@@ -40,10 +62,10 @@ const Game = () => {
   }, [dontShowAgain]);
 
   const handleGameOver = useCallback(
-    (score: number) => {
+    async (score: number) => {
       setFinalScore(score);
       setIsGameOver(true);
-      saveScore(score); // 최고 점수보다 높으면 자동 저장
+      await saveScore(score);
     },
     [saveScore],
   );
@@ -51,13 +73,48 @@ const Game = () => {
   const handleRestart = useCallback(() => {
     setIsGameOver(false);
     setFinalScore(0);
-    resetNewRecord();
     setGameKey((prev) => prev + 1);
-  }, [resetNewRecord]);
+  }, []);
 
   const handleGoBack = useCallback(() => {
     navigate(-1);
   }, [navigate]);
+
+  // 비교 결과 계산
+  const getComparisonText = () => {
+    const opponentBest = getOpponentBestScore();
+    const opponentName = getOpponentNickname() || '상대방';
+
+    if (opponentBest === 0) {
+      return { text: `${opponentName}님이 아직 플레이하지 않았어요!`, className: '' };
+    }
+
+    if (finalScore > opponentBest) {
+      return {
+        text: `${opponentName}님의 최고 기록 ${opponentBest}점을 이겼어요!`,
+        className: Style.win,
+      };
+    } else if (finalScore === opponentBest) {
+      return {
+        text: `${opponentName}님의 최고 기록과 동점이에요!`,
+        className: Style.highlight,
+      };
+    } else {
+      return {
+        text: `${opponentName}님의 최고 기록까지 ${opponentBest - finalScore}점 부족해요!`,
+        className: Style.lose,
+      };
+    }
+  };
+
+  // 잘못된 접근 체크
+  if (!diaryId || !answerId) {
+    return (
+      <div className={Style.Layout}>
+        <div className={Style.Loading}>잘못된 접근입니다.</div>
+      </div>
+    );
+  }
 
   return (
     <div className={Style.Layout}>
@@ -65,17 +122,21 @@ const Game = () => {
       <div className={Style.ScoreBoardWrapper}>
         <div className={Style.ScoreBoard}>
           <div className={Style.ScoreItem}>
-            <span className={Style.ScoreLabel}>최고 점수</span>
-            <span className={Style.ScoreValue}>{bestScore}</span>
-          </div>
-          {/* 1:1 대결 기능 - 백엔드 연동 시 주석 해제
-          <div className={Style.ScoreItem}>
-            <span className={Style.ScoreLabel}>상대방 최고 점수</span>
-            <span className={`${Style.ScoreValue} ${Style.opponent}`}>
-              {getOpponentBestScore()}
+            <span className={Style.ScoreLabel}>
+              {getMyNickname() || '나'}의 최고 점수
+            </span>
+            <span className={Style.ScoreValue}>
+              {isLoading ? '-' : getMyBestScore()}
             </span>
           </div>
-          */}
+          <div className={Style.ScoreItem}>
+            <span className={Style.ScoreLabel}>
+              {getOpponentNickname() || '상대방'}의 최고 점수
+            </span>
+            <span className={`${Style.ScoreValue} ${Style.opponent}`}>
+              {isLoading ? '-' : getOpponentBestScore()}
+            </span>
+          </div>
         </div>
         <button
           className={Style.HelpButton}
@@ -93,6 +154,24 @@ const Game = () => {
           onGameOver={handleGameOver}
         />
       </div>
+
+      {/* TODO: 테스트 후 삭제 */}
+      <button
+        onClick={() => void handleGameOver(Math.floor(Math.random() * 500))}
+        style={{
+          position: 'fixed',
+          bottom: 100,
+          right: 10,
+          padding: '8px 12px',
+          background: '#ff7979',
+          color: 'white',
+          border: 'none',
+          borderRadius: 8,
+          zIndex: 9999,
+        }}
+      >
+        테스트 게임오버
+      </button>
 
       {/* 인트로 모달 (게임 방법) */}
       {isIntroModalOpen && (
@@ -130,6 +209,11 @@ const Game = () => {
             {isNewRecord && (
               <div className={Style.NewRecord}>새로운 최고 기록!</div>
             )}
+            <div className={Style.ScoreComparison}>
+              <span className={getComparisonText().className}>
+                {getComparisonText().text}
+              </span>
+            </div>
           </div>
         </CustomModal>
       )}
@@ -180,66 +264,3 @@ const Game = () => {
 };
 
 export default Game;
-
-/* ====================================================================
-   1:1 대결 기능 - 백엔드 연동 시 참고 코드
-   ====================================================================
-
-// imports 추가
-import { useParams } from 'react-router-dom';
-import type { GameRole } from '@/types/Game/types';
-import { getCookie } from '@/util/cookie-helper';
-
-// Game 컴포넌트 내부
-const { diaryAddress, answererId } = useParams<{
-  diaryAddress: string;
-  answererId: string;
-}>();
-
-// 역할 판단
-const userDiaryAddress = getCookie('diaryAddress');
-const role: GameRole = userDiaryAddress === diaryAddress ? 'owner' : 'answerer';
-
-// useGameScore 훅 (1:1 버전)
-const { isLoading, saveScore, getMyBestScore, getOpponentBestScore } = useGameScore({
-  diaryAddress: diaryAddress ?? '',
-  answererId: answererId ?? '',
-  role,
-});
-
-// 비교 결과 계산
-const getComparisonText = () => {
-  const opponentBest = getOpponentBestScore();
-
-  if (opponentBest === 0) {
-    return { text: '상대방이 아직 플레이하지 않았어요!', className: '' };
-  }
-
-  if (finalScore > opponentBest) {
-    return {
-      text: `상대방 최고 기록 ${opponentBest}점을 이겼어요!`,
-      className: Style.win,
-    };
-  } else if (finalScore === opponentBest) {
-    return {
-      text: `상대방 최고 기록과 동점이에요!`,
-      className: Style.highlight,
-    };
-  } else {
-    return {
-      text: `상대방 최고 기록 ${opponentBest}점에 ${opponentBest - finalScore}점 부족해요!`,
-      className: Style.lose,
-    };
-  }
-};
-
-// 잘못된 접근 체크
-if (!diaryAddress || !answererId) {
-  return (
-    <div className={Style.Layout}>
-      <div className={Style.Loading}>잘못된 접근입니다.</div>
-    </div>
-  );
-}
-
-==================================================================== */

@@ -42,8 +42,7 @@ const router = createBrowserRouter([
       { path: 'finish', element: <Finish /> },
       // { path: 'chat/enter_room', element: <Chat /> }, // 채팅 기능 비활성화
 
-      { path: 'game', element: <Game /> },
-      // { path: 'game/:diaryAddress/:answererId', element: <Game /> }, // 1:1 대결 기능 - 백엔드 연동 시 주석 해제
+      { path: 'game/:diaryId/:answerId', element: <Game /> },
 
       { path: 'answerers/:diaryAddress', element: <AnswerList /> },
 

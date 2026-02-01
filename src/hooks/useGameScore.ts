@@ -1,133 +1,118 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import { getBestScore, saveBestScore } from '@/api/Game/gameScore';
-
-interface UseGameScoreReturn {
-  bestScore: number;
-  saveScore: (score: number) => boolean;
-  isNewRecord: boolean;
-  resetNewRecord: () => void;
-}
-
-export const useGameScore = (): UseGameScoreReturn => {
-  const [bestScore, setBestScore] = useState<number>(0);
-  const [isNewRecord, setIsNewRecord] = useState<boolean>(false);
-
-  // 초기 로드
-  useEffect(() => {
-    setBestScore(getBestScore());
-  }, []);
-
-  // 점수 저장 (최고 점수보다 높을 때만 갱신)
-  const saveScore = useCallback((score: number): boolean => {
-    const updated = saveBestScore(score);
-    if (updated) {
-      setBestScore(score);
-      setIsNewRecord(true);
-    }
-    return updated;
-  }, []);
-
-  const resetNewRecord = useCallback(() => {
-    setIsNewRecord(false);
-  }, []);
-
-  return {
-    bestScore,
-    saveScore,
-    isNewRecord,
-    resetNewRecord,
-  };
-};
-
-/* ====================================================================
-   백엔드 API 연동 시 사용할 코드 (1:1 대결 기능)
-   ====================================================================
-
-import { useCallback, useEffect, useState } from 'react';
-
-import { getGameScores, saveGameScore } from '@/api/Game/gameScore';
-import type { GameRole, GameScoreData } from '@/types/Game/types';
+import {
+  type GameScoreResponse,
+  getGameScores,
+  saveGameScore,
+} from '@/api/Game/gameScore';
 
 interface UseGameScoreProps {
-  diaryAddress: string;
-  answererId: string;
-  role: GameRole;
+  diaryId: string;
+  answerId: string;
+  role: 'owner' | 'answerer';
 }
 
 interface UseGameScoreReturn {
-  scoreData: GameScoreData;
+  scoreData: GameScoreResponse | null;
   isLoading: boolean;
+  isNewRecord: boolean;
   saveScore: (score: number) => Promise<void>;
-  refetch: () => Promise<void>;
   getMyBestScore: () => number;
   getOpponentBestScore: () => number;
+  getMyNickname: () => string;
+  getOpponentNickname: () => string;
 }
 
 export const useGameScore = ({
-  diaryAddress,
-  answererId,
+  diaryId,
+  answerId,
   role,
 }: UseGameScoreProps): UseGameScoreReturn => {
-  const [scoreData, setScoreData] = useState<GameScoreData>({
-    ownerBestScore: 0,
-    answererBestScore: 0,
-  });
+  const [scoreData, setScoreData] = useState<GameScoreResponse | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isNewRecord, setIsNewRecord] = useState(false);
 
+  // 점수 조회
   const fetchScores = useCallback(async () => {
-    if (!diaryAddress || !answererId) return;
+    if (!diaryId || !answerId) return;
 
     setIsLoading(true);
     try {
-      const data = await getGameScores(diaryAddress, answererId);
+      const data = await getGameScores(diaryId, answerId);
       setScoreData(data);
     } catch (error) {
       console.error('Failed to fetch game scores:', error);
+      // 에러 시 기본값 설정
+      setScoreData({
+        ownerBestScore: 0,
+        answererBestScore: 0,
+        ownerNickname: '',
+        answererNickname: '',
+      });
     } finally {
       setIsLoading(false);
     }
-  }, [diaryAddress, answererId]);
+  }, [diaryId, answerId]);
 
   useEffect(() => {
     void fetchScores();
   }, [fetchScores]);
 
+  // 점수 저장
   const saveScore = useCallback(
     async (score: number) => {
-      if (!diaryAddress || !answererId) return;
+      if (!diaryId || !answerId) return;
 
       try {
-        await saveGameScore({
-          diaryAddress,
-          answererId,
+        const response = await saveGameScore({
+          diaryId,
+          answerId,
           score,
           role,
         });
-        await fetchScores();
+        setScoreData(response);
+        if (response.isNewRecord) {
+          setIsNewRecord(true);
+        }
       } catch (error) {
         console.error('Failed to save game score:', error);
       }
     },
-    [diaryAddress, answererId, role, fetchScores],
+    [diaryId, answerId, role],
   );
 
+  // 내 최고 점수
   const getMyBestScore = useCallback(() => {
+    if (!scoreData) return 0;
     return role === 'owner' ? scoreData.ownerBestScore : scoreData.answererBestScore;
   }, [role, scoreData]);
 
+  // 상대방 최고 점수
   const getOpponentBestScore = useCallback(() => {
+    if (!scoreData) return 0;
     return role === 'owner' ? scoreData.answererBestScore : scoreData.ownerBestScore;
+  }, [role, scoreData]);
+
+  // 내 닉네임
+  const getMyNickname = useCallback(() => {
+    if (!scoreData) return '';
+    return role === 'owner' ? scoreData.ownerNickname : scoreData.answererNickname;
+  }, [role, scoreData]);
+
+  // 상대방 닉네임
+  const getOpponentNickname = useCallback(() => {
+    if (!scoreData) return '';
+    return role === 'owner' ? scoreData.answererNickname : scoreData.ownerNickname;
   }, [role, scoreData]);
 
   return {
     scoreData,
     isLoading,
+    isNewRecord,
     saveScore,
-    refetch: fetchScores,
     getMyBestScore,
     getOpponentBestScore,
+    getMyNickname,
+    getOpponentNickname,
   };
 };
-
-==================================================================== */

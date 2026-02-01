@@ -196,11 +196,9 @@ const useAnswerList = (
   };
 
   const handleOpenGame = useCallback(
-    (_props: IGameInfo): void => {
-      // 1:1 대결 기능 - 백엔드 연동 시 주석 해제
-      // const { answererId, diaryAddress } = props;
-      // void navigate(`/game/${diaryAddress}/${answererId}`);
-      void navigate('/game');
+    (props: IGameInfo): void => {
+      const { answererId, diaryAddress } = props;
+      void navigate(`/game/${diaryAddress}/${answererId}`);
     },
     [navigate],
   );
