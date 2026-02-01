@@ -1,22 +1,22 @@
 import type { GameConfig, HeartConfig, HeartLevel } from '@/types/Game/types';
 
-// 게임 설정 (모바일 최적화 - 0.6 스케일)
+// 게임 설정 (0.7 스케일 - PC/모바일 균형)
 export const GAME_CONFIG: GameConfig = {
-  canvasWidth: 360,
-  canvasHeight: 540,
-  wallThickness: 12,
-  gameOverLineY: 90,
-  dropAreaY: 48,
+  canvasWidth: 420,
+  canvasHeight: 630,
+  wallThickness: 14,
+  gameOverLineY: 105,
+  dropAreaY: 56,
   gravity: 2.5,
   maxSpawnLevel: 5, // 드롭 시 생성 가능한 최대 레벨 (0~5)
 };
 
-// 하트 데이터 (레벨 0~12, 모바일 최적화 - 0.6 스케일)
+// 하트 데이터 (레벨 0~12, 0.7 스케일)
 // twemoji SVG 이미지 사용
 export const HEARTS: Record<HeartLevel, HeartConfig> = {
   0: {
     level: 0,
-    radius: 17,
+    radius: 20,
     color: '#FFFFFF',
     emoji: '🤍',
     score: 1,
@@ -24,7 +24,7 @@ export const HEARTS: Record<HeartLevel, HeartConfig> = {
   },
   1: {
     level: 1,
-    radius: 21,
+    radius: 25,
     color: '#B0B0B0',
     emoji: '🩶',
     score: 2,
@@ -32,7 +32,7 @@ export const HEARTS: Record<HeartLevel, HeartConfig> = {
   },
   2: {
     level: 2,
-    radius: 25,
+    radius: 29,
     color: '#4A4A4A',
     emoji: '🖤',
     score: 4,
@@ -40,7 +40,7 @@ export const HEARTS: Record<HeartLevel, HeartConfig> = {
   },
   3: {
     level: 3,
-    radius: 28,
+    radius: 33,
     color: '#8B5A3C',
     emoji: '🤎',
     score: 7,
@@ -48,7 +48,7 @@ export const HEARTS: Record<HeartLevel, HeartConfig> = {
   },
   4: {
     level: 4,
-    radius: 32,
+    radius: 37,
     color: '#9370DB',
     emoji: '💜',
     score: 11,
@@ -56,7 +56,7 @@ export const HEARTS: Record<HeartLevel, HeartConfig> = {
   },
   5: {
     level: 5,
-    radius: 35,
+    radius: 41,
     color: '#87CEEB',
     emoji: '🩵',
     score: 16,
@@ -64,7 +64,7 @@ export const HEARTS: Record<HeartLevel, HeartConfig> = {
   },
   6: {
     level: 6,
-    radius: 40,
+    radius: 47,
     color: '#4169E1',
     emoji: '💙',
     score: 22,
@@ -72,7 +72,7 @@ export const HEARTS: Record<HeartLevel, HeartConfig> = {
   },
   7: {
     level: 7,
-    radius: 43,
+    radius: 50,
     color: '#32CD32',
     emoji: '💚',
     score: 29,
@@ -80,7 +80,7 @@ export const HEARTS: Record<HeartLevel, HeartConfig> = {
   },
   8: {
     level: 8,
-    radius: 47,
+    radius: 55,
     color: '#FFD700',
     emoji: '💛',
     score: 37,
@@ -88,7 +88,7 @@ export const HEARTS: Record<HeartLevel, HeartConfig> = {
   },
   9: {
     level: 9,
-    radius: 50,
+    radius: 58,
     color: '#FFA500',
     emoji: '🧡',
     score: 46,
@@ -96,7 +96,7 @@ export const HEARTS: Record<HeartLevel, HeartConfig> = {
   },
   10: {
     level: 10,
-    radius: 54,
+    radius: 63,
     color: '#FF69B4',
     emoji: '🩷',
     score: 56,
@@ -104,7 +104,7 @@ export const HEARTS: Record<HeartLevel, HeartConfig> = {
   },
   11: {
     level: 11,
-    radius: 58,
+    radius: 68,
     color: '#FF0000',
     emoji: '❤️',
     score: 67,
@@ -112,7 +112,7 @@ export const HEARTS: Record<HeartLevel, HeartConfig> = {
   },
   12: {
     level: 12,
-    radius: 62,
+    radius: 72,
     color: '#FF1493',
     emoji: '💗',
     score: 79,

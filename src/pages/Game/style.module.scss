@@ -7,14 +7,12 @@
   justify-content: flex-start;
   width: 100%;
   // 게임 페이지만 뷰포트에 맞춤 (헤더 35px + 광고 약 90px 고려)
-  height: calc(100dvh - 125px);
-  max-height: calc(100dvh - 125px);
+  height: calc(100dvh - 107px);
+  max-height: calc(100dvh - 107px);
   padding: 0.5rem 1rem;
   padding-bottom: env(safe-area-inset-bottom);
   background: linear-gradient(180deg, #fff5eb 0%, #fff0f0 50%, #ffe5e5 100%);
   overflow: hidden;
-  // 부모(MainContent)의 중앙 정렬 무시하고 위쪽에 붙이기
-  margin-bottom: auto;
 }
 
 .Header {
