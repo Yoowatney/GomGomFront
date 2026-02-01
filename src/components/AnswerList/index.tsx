@@ -41,7 +41,8 @@ const AnswerListSection = (props: IAnswerListSection) => {
     diaryId,
     correctAnswerer,
     handleDisplayResponse,
-    handleOpenChat,
+    // handleOpenChat, // 채팅 기능 비활성화
+    handleOpenGame,
     currentPage,
     totalPages,
     handlePageClick,
@@ -197,7 +198,8 @@ const AnswerListSection = (props: IAnswerListSection) => {
           diaryId={diaryId}
           correctAnswerer={correctAnswerer}
           handleDisplayResponse={handleDisplayResponse}
-          handleOpenChat={handleOpenChat}
+          // handleOpenChat={handleOpenChat} // 채팅 기능 비활성화
+          handleOpenGame={handleOpenGame}
         />
         <Pagination
           currentPage={currentPage}

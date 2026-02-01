@@ -1,7 +1,8 @@
 import type { IAnswerer, IAnswerListSection } from '@/types/Answer/types';
 import {
-  getChatIcon,
+  // getChatIcon, // 채팅 기능 비활성화
   getClassNameForAnswerer,
+  getGameIcon,
   getLatestMilestone,
 } from '@/util/answerer-helper';
 
@@ -14,7 +15,8 @@ type AnswererListProps = Pick<
   | 'diaryId'
   | 'correctAnswerer'
   | 'handleDisplayResponse'
-  | 'handleOpenChat'
+  // | 'handleOpenChat' // 채팅 기능 비활성화
+  | 'handleOpenGame'
   | 'sortOrder'
   | 'start'
 >;
@@ -24,7 +26,8 @@ const AnswererList = (props: AnswererListProps) => {
     answererList,
     answererCount,
     handleDisplayResponse,
-    handleOpenChat,
+    // handleOpenChat, // 채팅 기능 비활성화
+    handleOpenGame,
     diaryId,
     correctAnswerer,
     sortOrder,
@@ -97,7 +100,26 @@ const AnswererList = (props: AnswererListProps) => {
               >
                 {person.answerer} 님의 답장
               </div>
-              <button
+              {/* 게임 버튼 */}
+              {getGameIcon({ user: person, correctAnswerer, diaryId }) && (
+                <button
+                  className={Style.ChatIcon}
+                  onClick={() =>
+                    handleOpenGame({
+                      answererId: person._id,
+                      diaryAddress: diaryId,
+                    })
+                  }
+                  style={{
+                    position: 'absolute',
+                    right: 0,
+                  }}
+                >
+                  {getGameIcon({ user: person, correctAnswerer, diaryId })}
+                </button>
+              )}
+              {/* 채팅 버튼 - 비활성화 */}
+              {/* <button
                 className={Style.ChatIcon}
                 onClick={() =>
                   void handleOpenChat({
@@ -111,7 +133,7 @@ const AnswererList = (props: AnswererListProps) => {
                 }}
               >
                 {getChatIcon({ user: person, correctAnswerer, diaryId })}
-              </button>
+              </button> */}
             </div>
           </div>
         );

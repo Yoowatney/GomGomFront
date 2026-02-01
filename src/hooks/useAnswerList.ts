@@ -9,6 +9,7 @@ import { getDetailAnswer } from '@/api/Create/detailAnswer';
 import { answerAtom } from '@/store/answer';
 import { chatTokenAtom, guestAddressAtom, roomIdAtom } from '@/store/chat';
 import { questionAtom } from '@/store/create';
+import type { IGameInfo } from '@/types/Answer/types';
 import type { IChatInfo } from '@/types/Chat/types';
 import { getCookie, setCookie } from '@/util/cookie-helper';
 
@@ -194,6 +195,16 @@ const useAnswerList = (
     }
   };
 
+  const handleOpenGame = useCallback(
+    (_props: IGameInfo): void => {
+      // 1:1 대결 기능 - 백엔드 연동 시 주석 해제
+      // const { answererId, diaryAddress } = props;
+      // void navigate(`/game/${diaryAddress}/${answererId}`);
+      void navigate('/game');
+    },
+    [navigate],
+  );
+
   return {
     answererList,
     answererCount,
@@ -216,6 +227,7 @@ const useAnswerList = (
     chatOwnerRequired,
     resetChatOwnerRequired,
     handleOpenChat,
+    handleOpenGame,
     start,
   };
 };

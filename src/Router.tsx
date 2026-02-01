@@ -6,8 +6,16 @@ import Answerer from './pages/Answer/Answerer';
 import Done from './pages/Answer/Done';
 import MatchChallenge from './pages/Answer/MatchChallenge';
 import WriteAnswer from './pages/Answer/WriteAnswer';
-import Chat from './pages/Chat';
+import Blog from './pages/Blog';
+import AnonymousDiaryBenefits from './pages/Blog/posts/AnonymousDiaryBenefits';
+import AskingGoodQuestions from './pages/Blog/posts/AskingGoodQuestions';
+import DiaryMentalHealth from './pages/Blog/posts/DiaryMentalHealth';
+import EmotionalWritingBenefits from './pages/Blog/posts/EmotionalWritingBenefits';
+import GomgomCompleteGuide from './pages/Blog/posts/GomgomCompleteGuide';
+import HowToWriteDiary from './pages/Blog/posts/HowToWriteDiary';
+// import Chat from './pages/Chat'; // 채팅 기능 비활성화
 import Answer from './pages/Create/Answer';
+import Game from './pages/Game';
 import AnswerList from './pages/Create/AnswerList';
 import Challenge from './pages/Create/Challenge';
 import Countersign from './pages/Create/Countersign';
@@ -19,6 +27,7 @@ import FAQ from './pages/FAQ';
 import History from './pages/History';
 import HistoryItem from './pages/History/HistoryItem';
 import NotFound from './pages/NotFound/NotFound';
+import Privacy from './pages/Privacy';
 
 const router = createBrowserRouter([
   {
@@ -31,7 +40,10 @@ const router = createBrowserRouter([
       { path: 'challenge', element: <Challenge /> },
       { path: 'countersign', element: <Countersign /> },
       { path: 'finish', element: <Finish /> },
-      { path: 'chat/enter_room', element: <Chat /> },
+      // { path: 'chat/enter_room', element: <Chat /> }, // 채팅 기능 비활성화
+
+      { path: 'game', element: <Game /> },
+      // { path: 'game/:diaryAddress/:answererId', element: <Game /> }, // 1:1 대결 기능 - 백엔드 연동 시 주석 해제
 
       { path: 'answerers/:diaryAddress', element: <AnswerList /> },
 
@@ -53,8 +65,27 @@ const router = createBrowserRouter([
       { path: 'history/:historyItemId', element: <HistoryItem /> },
       { path: 'about', element: <About /> },
       { path: 'faq', element: <FAQ /> },
-      { path: '/*', element: <NotFound /> },
+      { path: 'privacy', element: <Privacy /> },
+      { path: 'blog', element: <Blog /> },
+      { path: 'blog/how-to-write-diary', element: <HowToWriteDiary /> },
+      {
+        path: 'blog/emotional-writing-benefits',
+        element: <EmotionalWritingBenefits />,
+      },
+      { path: 'blog/asking-good-questions', element: <AskingGoodQuestions /> },
+      { path: 'blog/gomgom-complete-guide', element: <GomgomCompleteGuide /> },
+      {
+        path: 'blog/anonymous-diary-benefits',
+        element: <AnonymousDiaryBenefits />,
+      },
+      { path: 'blog/diary-mental-health', element: <DiaryMentalHealth /> },
     ],
+  },
+  // 404 페이지 - 광고 없음 (AdSense 정책 준수)
+  {
+    path: '*',
+    element: <App showAd={false} />,
+    children: [{ path: '*', element: <NotFound /> }],
   },
 ]);
 

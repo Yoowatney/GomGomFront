@@ -65,8 +65,14 @@ const About = () => {
       </section>
 
       <div className={Style.Navigation}>
+        <Link to="/blog" className={Style.NavLink}>
+          곰곰 블로그 보기
+        </Link>
         <Link to="/faq" className={Style.NavLink}>
           자주 묻는 질문 보기
+        </Link>
+        <Link to="/privacy" className={Style.NavLink}>
+          개인정보처리방침
         </Link>
         <Link to="/" className={Style.NavLink}>
           홈으로 돌아가기
