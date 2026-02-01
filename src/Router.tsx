@@ -13,7 +13,7 @@ import DiaryMentalHealth from './pages/Blog/posts/DiaryMentalHealth';
 import EmotionalWritingBenefits from './pages/Blog/posts/EmotionalWritingBenefits';
 import GomgomCompleteGuide from './pages/Blog/posts/GomgomCompleteGuide';
 import HowToWriteDiary from './pages/Blog/posts/HowToWriteDiary';
-// import Chat from './pages/Chat'; // 채팅 기능 비활성화
+import Chat from './pages/Chat';
 import Answer from './pages/Create/Answer';
 import Game from './pages/Game';
 import AnswerList from './pages/Create/AnswerList';
@@ -40,7 +40,7 @@ const router = createBrowserRouter([
       { path: 'challenge', element: <Challenge /> },
       { path: 'countersign', element: <Countersign /> },
       { path: 'finish', element: <Finish /> },
-      // { path: 'chat/enter_room', element: <Chat /> }, // 채팅 기능 비활성화
+      { path: 'chat/enter_room', element: <Chat /> },
 
       { path: 'game/:diaryId/:answerId', element: <Game /> },
 

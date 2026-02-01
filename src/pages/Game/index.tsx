@@ -155,23 +155,25 @@ const Game = () => {
         />
       </div>
 
-      {/* TODO: 테스트 후 삭제 */}
-      <button
-        onClick={() => void handleGameOver(Math.floor(Math.random() * 500))}
-        style={{
-          position: 'fixed',
-          bottom: 100,
-          right: 10,
-          padding: '8px 12px',
-          background: '#ff7979',
-          color: 'white',
-          border: 'none',
-          borderRadius: 8,
-          zIndex: 9999,
-        }}
-      >
-        테스트 게임오버
-      </button>
+      {/* 개발환경 테스트 버튼 */}
+      {import.meta.env.DEV && (
+        <button
+          onClick={() => void handleGameOver(Math.floor(Math.random() * 500))}
+          style={{
+            position: 'fixed',
+            bottom: 100,
+            right: 10,
+            padding: '8px 12px',
+            background: '#ff7979',
+            color: 'white',
+            border: 'none',
+            borderRadius: 8,
+            zIndex: 9999,
+          }}
+        >
+          테스트 게임오버
+        </button>
+      )}
 
       {/* 인트로 모달 (게임 방법) */}
       {isIntroModalOpen && (

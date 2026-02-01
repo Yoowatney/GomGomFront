@@ -1,6 +1,6 @@
 import type { IAnswerer, IAnswerListSection } from '@/types/Answer/types';
 import {
-  // getChatIcon, // 채팅 기능 비활성화
+  getChatIcon,
   getClassNameForAnswerer,
   getGameIcon,
   getLatestMilestone,
@@ -15,7 +15,7 @@ type AnswererListProps = Pick<
   | 'diaryId'
   | 'correctAnswerer'
   | 'handleDisplayResponse'
-  // | 'handleOpenChat' // 채팅 기능 비활성화
+  | 'handleOpenChat'
   | 'handleOpenGame'
   | 'sortOrder'
   | 'start'
@@ -26,7 +26,7 @@ const AnswererList = (props: AnswererListProps) => {
     answererList,
     answererCount,
     handleDisplayResponse,
-    // handleOpenChat, // 채팅 기능 비활성화
+    handleOpenChat,
     handleOpenGame,
     diaryId,
     correctAnswerer,
@@ -112,14 +112,14 @@ const AnswererList = (props: AnswererListProps) => {
                   }
                   style={{
                     position: 'absolute',
-                    right: 0,
+                    right: 32,
                   }}
                 >
                   {getGameIcon({ user: person, correctAnswerer, diaryId })}
                 </button>
               )}
-              {/* 채팅 버튼 - 비활성화 */}
-              {/* <button
+              {/* 채팅 버튼 */}
+              <button
                 className={Style.ChatIcon}
                 onClick={() =>
                   void handleOpenChat({
@@ -133,7 +133,7 @@ const AnswererList = (props: AnswererListProps) => {
                 }}
               >
                 {getChatIcon({ user: person, correctAnswerer, diaryId })}
-              </button> */}
+              </button>
             </div>
           </div>
         );
