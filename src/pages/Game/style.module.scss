@@ -1,0 +1,370 @@
+// 원본 growing-heart-game 스타일 기반
+
+.Layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  // 게임 페이지만 뷰포트에 맞춤 (헤더 35px + 광고 약 90px 고려)
+  height: calc(100dvh - 107px);
+  max-height: calc(100dvh - 107px);
+  padding: 0.5rem 1rem;
+  padding-bottom: env(safe-area-inset-bottom);
+  background: linear-gradient(180deg, #fff5eb 0%, #fff0f0 50%, #ffe5e5 100%);
+  overflow: hidden;
+}
+
+.Header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 0.5rem;
+}
+
+.BackButton {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 8px;
+  color: #d96c6c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.Title {
+  font-size: 1.75rem;
+  font-weight: bold;
+  background: linear-gradient(to right, #d96c6c, #e68a8a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.Controls {
+  display: flex;
+  gap: 8px;
+}
+
+.IconButton {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: rgba(217, 108, 108, 0.1);
+    transform: scale(1.1);
+  }
+}
+
+.RoleTag {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 8px;
+
+  &.owner {
+    background: linear-gradient(to right, #fdacac, #fd7979);
+    color: white;
+  }
+
+  &.answerer {
+    background: linear-gradient(to right, #b8a4c9, #9370db);
+    color: white;
+  }
+}
+
+.ScoreBoardWrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  flex-shrink: 0;
+}
+
+.ScoreBoard {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  padding: 4px;
+}
+
+.ScoreItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.ScoreLabel {
+  font-size: 12px;
+  color: #666666;
+}
+
+.ScoreValue {
+  font-size: 20px;
+  font-weight: bold;
+  color: #c68a5c;
+
+  &.opponent {
+    color: #9370db;
+  }
+}
+
+.GameContainer {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  min-height: 0; // flex 자식이 줄어들 수 있도록
+  overflow: hidden;
+  border-radius: 0.5rem;
+}
+
+.Canvas {
+  border-radius: 0.5rem;
+  cursor: pointer;
+  box-shadow: 0 25px 50px -12px rgba(253, 121, 121, 0.3);
+  touch-action: none;
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  overflow: hidden;
+}
+
+// 게임 오버 모달 컨텐츠
+.GameOverContent {
+  text-align: center;
+  padding: 8px 0;
+}
+
+.FinalScore {
+  font-size: 48px;
+  font-weight: bold;
+  color: #c68a5c;
+  margin-bottom: 8px;
+}
+
+.NewRecord {
+  font-size: 16px;
+  font-weight: bold;
+  color: #ff7979;
+}
+
+.ScoreComparison {
+  color: #4a4a4a;
+  margin-top: 12px;
+  line-height: 1.6;
+
+  .highlight {
+    color: #d96c6c;
+  }
+
+  .win {
+    color: #4caf50;
+    font-weight: bold;
+  }
+
+  .lose {
+    color: #fd7979;
+    font-weight: bold;
+  }
+}
+
+.Instructions {
+  margin-top: 12px;
+  padding: 12px 16px;
+  background: linear-gradient(180deg, #fff5f0 0%, #ffe5e5 100%);
+  border-radius: 12px;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(253, 121, 121, 0.15);
+}
+
+.InstructionTitle {
+  font-size: 14px;
+  font-weight: bold;
+  color: #d96c6c;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.InstructionList {
+  font-size: 12px;
+  color: #666666;
+  line-height: 1.6;
+  padding-left: 20px;
+  margin: 0;
+
+  li {
+    margin-bottom: 4px;
+  }
+}
+
+.Loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  font-size: 18px;
+  color: #d96c6c;
+}
+
+// 도움말 버튼
+.HelpButton {
+  position: absolute;
+  right: 0;
+  background: linear-gradient(to right, #fdacac, #fd7979);
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(253, 121, 121, 0.3);
+
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(253, 121, 121, 0.5);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+// 도움말 모달 하트 그리드
+.HelpHeartGrid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.HelpHeartRow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.HelpHeartSmall {
+  width: 32px;
+  height: 32px;
+}
+
+.HelpHeartMedium {
+  width: 48px;
+  height: 48px;
+}
+
+.HelpHeartLarge {
+  width: 64px;
+  height: 64px;
+}
+
+// 인트로 모달
+.IntroDescription {
+  text-align: center;
+  line-height: 1.5;
+}
+
+.DontShowAgain {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+
+  input[type='checkbox'] {
+    width: 18px;
+    height: 18px;
+    accent-color: #fd7979;
+    cursor: pointer;
+  }
+
+  span {
+    font-size: 14px;
+    color: #666666;
+  }
+}
+
+// 반응형
+@media (max-width: 768px) {
+  .Title {
+    font-size: 1.5rem;
+  }
+
+  .ScoreBoard {
+    gap: 16px;
+    padding: 10px;
+  }
+
+  .ScoreLabel {
+    font-size: 11px;
+  }
+
+  .ScoreValue {
+    font-size: 18px;
+  }
+
+  .Canvas {
+    width: 100%;
+    max-width: 100vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .Layout {
+    padding: 0.25rem 0.5rem;
+  }
+
+  .Title {
+    font-size: 1.25rem;
+  }
+
+  .Header {
+    margin-bottom: 0.25rem;
+  }
+
+  .ScoreBoard {
+    margin-bottom: 8px;
+  }
+
+  .Instructions {
+    margin-top: 8px;
+    padding: 10px 12px;
+  }
+
+  .ModalContent {
+    padding: 24px;
+  }
+
+  .FinalScore {
+    font-size: 36px;
+  }
+}

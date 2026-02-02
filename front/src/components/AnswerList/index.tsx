@@ -42,6 +42,7 @@ const AnswerListSection = (props: IAnswerListSection) => {
     correctAnswerer,
     handleDisplayResponse,
     handleOpenChat,
+    handleOpenGame,
     currentPage,
     totalPages,
     handlePageClick,
@@ -198,6 +199,7 @@ const AnswerListSection = (props: IAnswerListSection) => {
           correctAnswerer={correctAnswerer}
           handleDisplayResponse={handleDisplayResponse}
           handleOpenChat={handleOpenChat}
+          handleOpenGame={handleOpenGame}
         />
         <Pagination
           currentPage={currentPage}

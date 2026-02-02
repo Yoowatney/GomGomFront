@@ -6,8 +6,16 @@ import Answerer from './pages/Answer/Answerer';
 import Done from './pages/Answer/Done';
 import MatchChallenge from './pages/Answer/MatchChallenge';
 import WriteAnswer from './pages/Answer/WriteAnswer';
+import Blog from './pages/Blog';
+import AnonymousDiaryBenefits from './pages/Blog/posts/AnonymousDiaryBenefits';
+import AskingGoodQuestions from './pages/Blog/posts/AskingGoodQuestions';
+import DiaryMentalHealth from './pages/Blog/posts/DiaryMentalHealth';
+import EmotionalWritingBenefits from './pages/Blog/posts/EmotionalWritingBenefits';
+import GomgomCompleteGuide from './pages/Blog/posts/GomgomCompleteGuide';
+import HowToWriteDiary from './pages/Blog/posts/HowToWriteDiary';
 import Chat from './pages/Chat';
 import Answer from './pages/Create/Answer';
+import Game from './pages/Game';
 import AnswerList from './pages/Create/AnswerList';
 import Challenge from './pages/Create/Challenge';
 import Countersign from './pages/Create/Countersign';
@@ -34,6 +42,8 @@ const router = createBrowserRouter([
       { path: 'finish', element: <Finish /> },
       { path: 'chat/enter_room', element: <Chat /> },
 
+      { path: 'game/:diaryId/:answerId', element: <Game /> },
+
       { path: 'answerers/:diaryAddress', element: <AnswerList /> },
 
       { path: 'diary/:diaryAddress', element: <MatchChallenge /> },
@@ -55,6 +65,19 @@ const router = createBrowserRouter([
       { path: 'about', element: <About /> },
       { path: 'faq', element: <FAQ /> },
       { path: 'privacy', element: <Privacy /> },
+      { path: 'blog', element: <Blog /> },
+      { path: 'blog/how-to-write-diary', element: <HowToWriteDiary /> },
+      {
+        path: 'blog/emotional-writing-benefits',
+        element: <EmotionalWritingBenefits />,
+      },
+      { path: 'blog/asking-good-questions', element: <AskingGoodQuestions /> },
+      { path: 'blog/gomgom-complete-guide', element: <GomgomCompleteGuide /> },
+      {
+        path: 'blog/anonymous-diary-benefits',
+        element: <AnonymousDiaryBenefits />,
+      },
+      { path: 'blog/diary-mental-health', element: <DiaryMentalHealth /> },
     ],
   },
   // 404 페이지 - 광고 없음 (AdSense 정책 준수)

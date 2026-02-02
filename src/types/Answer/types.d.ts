@@ -29,6 +29,11 @@ interface IAnswerer {
   roomId?: string;
 }
 
+interface IGameInfo {
+  answererId: string;
+  diaryAddress: string;
+}
+
 interface IAnswerListSection {
   answererList: IAnswerer[];
   answererCount: number;
@@ -45,6 +50,7 @@ interface IAnswerListSection {
   handlePageClick: (pageNumber: number) => void;
   handleDisplayResponse: (answererId: string) => Promise<void>;
   handleOpenChat: (props: IChatInfo) => Promise<void>;
+  handleOpenGame: (props: IGameInfo) => void;
 }
 
 interface IAnswererClassName {
@@ -66,6 +72,7 @@ export {
   IAnswerListSection,
   IChatIcon,
   IDiaryToken,
+  IGameInfo,
   IQuestionerInfo,
   IQuestionInfo,
   IRequirementForAnswer,

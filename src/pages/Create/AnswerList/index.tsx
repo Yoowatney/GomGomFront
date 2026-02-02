@@ -42,6 +42,7 @@ const AnswerList = () => {
     chatOwnerRequired,
     resetChatOwnerRequired,
     handleOpenChat,
+    handleOpenGame,
     start,
   } = useAnswerList(diaryAddress ?? '');
 
@@ -173,6 +174,7 @@ const AnswerList = () => {
             generatePageNumbers={generatePageNumbers}
             handleDisplayResponse={handleDisplayResponse}
             handleOpenChat={handleOpenChat}
+            handleOpenGame={handleOpenGame}
             correctAnswerer={correctAnswerer}
             diaryId={diaryAddress ?? ''}
             sortOrder={sortOrder}

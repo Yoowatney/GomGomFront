@@ -65,6 +65,9 @@ const About = () => {
       </section>
 
       <div className={Style.Navigation}>
+        <Link to="/blog" className={Style.NavLink}>
+          곰곰 블로그 보기
+        </Link>
         <Link to="/faq" className={Style.NavLink}>
           자주 묻는 질문 보기
         </Link>

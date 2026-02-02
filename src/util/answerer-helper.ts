@@ -69,9 +69,32 @@ const getLatestMilestone = (answererCount: number): number | null => {
   return null;
 };
 
+/**
+ * 게임 아이콘을 반환합니다.
+ * 다이어리 주인이거나 자신의 답변인 경우에만 게임 버튼이 표시됩니다.
+ */
+const getGameIcon = (props: IChatIcon): string | null => {
+  const { user, correctAnswerer, diaryId } = props;
+
+  if (!correctAnswerer || !diaryId) {
+    return null;
+  }
+
+  const isDiaryOwner = correctAnswerer === diaryId;
+  const isMyAnswer = user._id === correctAnswerer;
+
+  // 다이어리 주인이거나 자신의 답변인 경우 게임 버튼 표시
+  if (isDiaryOwner || isMyAnswer) {
+    return '🎮';
+  }
+
+  return null;
+};
+
 export {
   getChatIcon,
   getClassNameForAnswerer,
+  getGameIcon,
   getLatestMilestone,
   MILESTONE_REQUIREMENTS,
 };
