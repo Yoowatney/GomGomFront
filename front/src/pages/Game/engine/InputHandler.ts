@@ -28,10 +28,12 @@ export class InputHandler {
     this.canvas.addEventListener('click', this.handleClick);
 
     // 터치 이벤트
+    this.canvas.addEventListener('touchstart', this.handleTouchStart, {
+      passive: false,
+    });
     this.canvas.addEventListener('touchmove', this.handleTouchMove, {
       passive: false,
     });
-    this.canvas.addEventListener('touchend', this.handleTouchEnd);
   }
 
   private getCanvasX(clientX: number): number {
@@ -49,15 +51,19 @@ export class InputHandler {
     this.tryDrop();
   };
 
+  private handleTouchStart = (e: TouchEvent): void => {
+    e.preventDefault();
+    const touch = e.touches[0];
+    this.mouseX = this.getCanvasX(touch.clientX);
+    this.onMove?.(this.mouseX);
+    this.tryDrop();
+  };
+
   private handleTouchMove = (e: TouchEvent): void => {
     e.preventDefault();
     const touch = e.touches[0];
     this.mouseX = this.getCanvasX(touch.clientX);
     this.onMove?.(this.mouseX);
-  };
-
-  private handleTouchEnd = (): void => {
-    this.tryDrop();
   };
 
   private tryDrop(): void {
@@ -85,7 +91,7 @@ export class InputHandler {
   dispose(): void {
     this.canvas.removeEventListener('mousemove', this.handleMouseMove);
     this.canvas.removeEventListener('click', this.handleClick);
+    this.canvas.removeEventListener('touchstart', this.handleTouchStart);
     this.canvas.removeEventListener('touchmove', this.handleTouchMove);
-    this.canvas.removeEventListener('touchend', this.handleTouchEnd);
   }
 }
