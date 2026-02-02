@@ -147,6 +147,12 @@ const FAQ = () => {
         <Link to="/about" className={Style.NavLink}>
           서비스 소개 보기
         </Link>
+        <Link to="/terms" className={Style.NavLink}>
+          이용약관
+        </Link>
+        <Link to="/privacy" className={Style.NavLink}>
+          개인정보처리방침
+        </Link>
         <Link to="/" className={Style.NavLink}>
           홈으로 돌아가기
         </Link>

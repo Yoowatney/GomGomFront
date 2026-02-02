@@ -36,6 +36,9 @@ const Privacy = () => {
       </section>
 
       <div className={Style.Navigation}>
+        <Link to="/terms" className={Style.NavLink}>
+          이용약관
+        </Link>
         <Link to="/about" className={Style.NavLink}>
           서비스 소개 보기
         </Link>

@@ -15,7 +15,6 @@ import GomgomCompleteGuide from './pages/Blog/posts/GomgomCompleteGuide';
 import HowToWriteDiary from './pages/Blog/posts/HowToWriteDiary';
 import Chat from './pages/Chat';
 import Answer from './pages/Create/Answer';
-import Game from './pages/Game';
 import AnswerList from './pages/Create/AnswerList';
 import Challenge from './pages/Create/Challenge';
 import Countersign from './pages/Create/Countersign';
@@ -24,10 +23,12 @@ import Question from './pages/Create/Question';
 import QuestionerNum from './pages/Create/QuestionNum';
 import Welcome from './pages/Create/Welcome';
 import FAQ from './pages/FAQ';
+import Game from './pages/Game';
 import History from './pages/History';
 import HistoryItem from './pages/History/HistoryItem';
 import NotFound from './pages/NotFound/NotFound';
 import Privacy from './pages/Privacy';
+import Terms from './pages/Terms';
 
 const router = createBrowserRouter([
   {
@@ -65,6 +66,7 @@ const router = createBrowserRouter([
       { path: 'about', element: <About /> },
       { path: 'faq', element: <FAQ /> },
       { path: 'privacy', element: <Privacy /> },
+      { path: 'terms', element: <Terms /> },
       { path: 'blog', element: <Blog /> },
       { path: 'blog/how-to-write-diary', element: <HowToWriteDiary /> },
       {
