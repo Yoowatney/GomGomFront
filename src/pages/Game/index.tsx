@@ -5,6 +5,7 @@ import CustomModal from '@/components/Modal/CustomModal';
 import { useGameScore } from '@/hooks/useGameScore';
 import type { HeartLevel } from '@/types/Game/types';
 import { getCookie } from '@/util/cookie-helper';
+import { EventTrigger } from '@/util/ga-helper';
 
 import { HEARTS } from './engine/config';
 import HeartMergeGame from './HeartMergeGame';
@@ -65,6 +66,14 @@ const Game = () => {
     async (score: number) => {
       setFinalScore(score);
       setIsGameOver(true);
+
+      EventTrigger({
+        action: '게임 플레이 완료',
+        category: 'game',
+        label: '게임 플레이 완료',
+        value: score,
+      });
+
       await saveScore(score);
     },
     [saveScore],

@@ -12,6 +12,7 @@ import { questionAtom } from '@/store/create';
 import type { IGameInfo } from '@/types/Answer/types';
 import type { IChatInfo } from '@/types/Chat/types';
 import { getCookie, setCookie } from '@/util/cookie-helper';
+import { EventTrigger } from '@/util/ga-helper';
 
 /**
  * 답변자 목록 조회와 페이지네이션 및 정렬
@@ -198,6 +199,14 @@ const useAnswerList = (
   const handleOpenGame = useCallback(
     (props: IGameInfo): void => {
       const { answererId, diaryAddress } = props;
+
+      EventTrigger({
+        action: '게임 버튼 클릭',
+        category: 'game',
+        label: '게임 버튼 클릭',
+        value: 1,
+      });
+
       void navigate(`/game/${diaryAddress}/${answererId}`);
     },
     [navigate],
