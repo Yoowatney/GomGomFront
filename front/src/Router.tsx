@@ -9,10 +9,15 @@ import WriteAnswer from './pages/Answer/WriteAnswer';
 import Blog from './pages/Blog';
 import AnonymousDiaryBenefits from './pages/Blog/posts/AnonymousDiaryBenefits';
 import AskingGoodQuestions from './pages/Blog/posts/AskingGoodQuestions';
+import CapturingMemories from './pages/Blog/posts/CapturingMemories';
 import DiaryMentalHealth from './pages/Blog/posts/DiaryMentalHealth';
+import DigitalConnection from './pages/Blog/posts/DigitalConnection';
 import EmotionalWritingBenefits from './pages/Blog/posts/EmotionalWritingBenefits';
+import FriendshipConversation from './pages/Blog/posts/FriendshipConversation';
 import GomgomCompleteGuide from './pages/Blog/posts/GomgomCompleteGuide';
+import GratitudeJournal from './pages/Blog/posts/GratitudeJournal';
 import HowToWriteDiary from './pages/Blog/posts/HowToWriteDiary';
+import SelfReflection from './pages/Blog/posts/SelfReflection';
 import Chat from './pages/Chat';
 import Answer from './pages/Create/Answer';
 import AnswerList from './pages/Create/AnswerList';
@@ -68,12 +73,17 @@ const router = createBrowserRouter([
       { path: 'privacy', element: <Privacy /> },
       { path: 'terms', element: <Terms /> },
       { path: 'blog', element: <Blog /> },
+      { path: 'blog/friendship-conversation', element: <FriendshipConversation /> },
+      { path: 'blog/self-reflection', element: <SelfReflection /> },
+      { path: 'blog/digital-connection', element: <DigitalConnection /> },
       { path: 'blog/how-to-write-diary', element: <HowToWriteDiary /> },
+      { path: 'blog/capturing-memories', element: <CapturingMemories /> },
       {
         path: 'blog/emotional-writing-benefits',
         element: <EmotionalWritingBenefits />,
       },
       { path: 'blog/asking-good-questions', element: <AskingGoodQuestions /> },
+      { path: 'blog/gratitude-journal', element: <GratitudeJournal /> },
       { path: 'blog/gomgom-complete-guide', element: <GomgomCompleteGuide /> },
       {
         path: 'blog/anonymous-diary-benefits',

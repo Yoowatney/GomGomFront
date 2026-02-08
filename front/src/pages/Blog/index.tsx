@@ -12,12 +12,44 @@ interface Post {
 
 const posts: Post[] = [
   {
+    slug: 'friendship-conversation',
+    title: '친구 관계 개선하기: 더 가까워지는 대화의 기술',
+    excerpt:
+      '오랜 친구인데도 대화가 어색해진 적 있으신가요? 의도적인 노력과 진정성 있는 대화로 더 깊은 관계를 만드는 방법을 소개합니다.',
+    date: '2025.01.20',
+    readTime: '6분',
+  },
+  {
+    slug: 'self-reflection',
+    title: '자기 성찰의 힘: 나를 알아가는 여정',
+    excerpt:
+      '바쁜 일상 속에서 자신을 돌아볼 시간을 갖기란 쉽지 않습니다. 자기 성찰이 주는 선물과 시작하는 방법을 알아봅니다.',
+    date: '2025.01.18',
+    readTime: '7분',
+  },
+  {
+    slug: 'digital-connection',
+    title: '디지털 시대의 소통: 온라인에서 진정성 있게 연결하기',
+    excerpt:
+      '수백 명의 SNS 친구가 있지만 외로움을 느끼시나요? 디지털 시대에 진정성 있는 관계를 맺는 방법을 소개합니다.',
+    date: '2025.01.16',
+    readTime: '5분',
+  },
+  {
     slug: 'how-to-write-diary',
     title: '효과적인 다이어리 작성법: 일기 쓰기의 기술',
     excerpt:
       '매일 꾸준히 일기를 쓰고 싶지만 무엇을 써야 할지 막막하신가요? 효과적인 다이어리 작성법을 알려드립니다.',
     date: '2025.01.15',
     readTime: '5분',
+  },
+  {
+    slug: 'capturing-memories',
+    title: '추억을 기록하는 방법: 소중한 순간을 간직하기',
+    excerpt:
+      '시간은 빠르게 흘러가고 소중했던 순간들은 희미해집니다. 추억을 효과적으로 기록하고 간직하는 방법을 알아봅니다.',
+    date: '2025.01.14',
+    readTime: '6분',
   },
   {
     slug: 'emotional-writing-benefits',
@@ -33,6 +65,14 @@ const posts: Post[] = [
     excerpt:
       '의미 있는 대화를 나누고 싶다면 좋은 질문에서 시작하세요. 친구의 마음을 여는 질문법을 알려드립니다.',
     date: '2025.01.10',
+    readTime: '5분',
+  },
+  {
+    slug: 'gratitude-journal',
+    title: '감사 일기의 효과: 긍정적인 마음 만들기',
+    excerpt:
+      '하루 감사한 일 세 가지 적기. 단순해 보이는 이 습관이 삶을 바꿀 수 있습니다. 과학이 증명한 감사 일기의 효과를 알아봅니다.',
+    date: '2025.01.11',
     readTime: '5분',
   },
   {
