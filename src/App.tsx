@@ -8,9 +8,11 @@ import Ad from './Ad';
 import Style from './App.module.scss';
 import Header from './components/Header';
 import { AdProvider, useAd } from './contexts/AdContext';
+import { useAdSense } from './hooks/useAdSense';
 
 function AppContent({ showAdProp = true }: { showAdProp?: boolean }) {
   const { showAd: showAdContext } = useAd();
+  useAdSense();
 
   useEffect(() => {
     ReactGA.initialize(
