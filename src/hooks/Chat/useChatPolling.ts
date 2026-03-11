@@ -240,20 +240,24 @@ export const useChatPolling = () => {
         return;
       }
 
+      const chatText = message;
+
       const newMessage: ExtendedChatMessage = {
         _id: Date.now().toString(),
         clientId: '',
         nickname,
-        chat: message,
+        chat: chatText,
         createdAt: new Date().toISOString(),
         isSender: true,
       };
 
+      // 먼저 로컬에 반영하고 입력 비우기 (optimistic update)
+      setMessages((prev) => [...prev, newMessage]);
+      setMessage('');
+      scrollToBottom();
+
       try {
-        await sendMessageApi(roomId, message, nickname);
-        setMessages((prev) => [...prev, newMessage]);
-        setMessage('');
-        scrollToBottom();
+        await sendMessageApi(roomId, chatText, nickname);
       } catch {
         console.error('메시지 전송에 실패했습니다.');
       }
