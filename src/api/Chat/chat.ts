@@ -4,6 +4,7 @@ import type {
   IChatNicknames,
   IChatRoomResponse,
   IChatToken,
+  IPollMessagesResponse,
 } from '@/types/Chat/types';
 
 import instance from '../api';
@@ -82,4 +83,43 @@ const getMessage = async ({
   }
 };
 
-export { getChatToken, getMessage, getNicknames, getPrevMessages, openChat };
+const pollMessages = async (
+  roomId: string,
+  since: string,
+): Promise<IPollMessagesResponse> => {
+  try {
+    const api = instance();
+    const response = await api.get<IPollMessagesResponse>(
+      `/chat/message/poll/${roomId}`,
+      { params: { since } },
+    );
+    return response.data;
+  } catch (e) {
+    console.error('메시지 폴링 실패', e);
+    throw e;
+  }
+};
+
+const sendMessageApi = async (
+  roomId: string,
+  chat: string,
+  nickname: string,
+): Promise<void> => {
+  try {
+    const api = instance();
+    await api.post('/chat/message', { roomId, chat, nickname });
+  } catch (e) {
+    console.error('메시지 전송 실패', e);
+    throw e;
+  }
+};
+
+export {
+  getChatToken,
+  getMessage,
+  getNicknames,
+  getPrevMessages,
+  openChat,
+  pollMessages,
+  sendMessageApi,
+};

@@ -38,6 +38,11 @@ interface IChatMessageInfo {
   isSender?: boolean;
 }
 
+interface IPollMessagesResponse {
+  messages: (IChatMessage & { isSender: boolean })[];
+  serverTime: string;
+}
+
 export {
   IChatInfo,
   IChatMessage,
@@ -47,4 +52,4 @@ export {
   IChatToken,
 };
 
-export type { IChatMessageInfo };
+export type { IChatMessageInfo, IPollMessagesResponse };

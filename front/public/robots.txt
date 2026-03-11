@@ -1,5 +1,25 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
 Allow: /
+Allow: /blog
+Allow: /blog/
+Allow: /about
+Allow: /faq
+Allow: /privacy
+Allow: /terms
+
+# 콘텐츠가 없는 앱 기능 페이지 차단
+Disallow: /questionNum
+Disallow: /question
+Disallow: /challenge
+Disallow: /countersign
+Disallow: /finish
+Disallow: /done
+Disallow: /diary/
+Disallow: /answerers/
+Disallow: /answer/
+Disallow: /game/
+Disallow: /history
+Disallow: /chat/
 
 Sitemap: https://gomgomdiary.site/sitemap.xml

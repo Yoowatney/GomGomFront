@@ -47,14 +47,20 @@ export class AudioManager {
 
     const unlockSound = (sound: HTMLAudioElement | null): Promise<void> => {
       if (!sound) return Promise.resolve();
+
+      // 언락 시 볼륨 0으로 재생 (소리 안 나게)
+      const originalVolume = sound.volume;
+      sound.volume = 0;
+
       return sound
         .play()
         .then(() => {
           sound.pause();
           sound.currentTime = 0;
+          sound.volume = originalVolume;
         })
         .catch(() => {
-          // 언락 에러 무시
+          sound.volume = originalVolume;
         });
     };
 
