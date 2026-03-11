@@ -2,7 +2,7 @@ import ReceiveMessage from '@/components/Chat/Message/ReceiveMessage';
 import SendMessage from '@/components/Chat/Message/SendMessage';
 import Input from '@/components/Input';
 import CustomModal from '@/components/Modal/CustomModal';
-import { useChat } from '@/hooks/Chat/useChat';
+import { useChatPolling as useChat } from '@/hooks/Chat/useChatPolling';
 
 import Style from './style.module.scss';
 
