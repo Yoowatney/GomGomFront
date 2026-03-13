@@ -41,8 +41,6 @@ const AnswerListSection = (props: IAnswerListSection) => {
     diaryId,
     correctAnswerer,
     handleDisplayResponse,
-    handleOpenChat,
-    handleOpenGame,
     currentPage,
     totalPages,
     handlePageClick,
@@ -185,6 +183,16 @@ const AnswerListSection = (props: IAnswerListSection) => {
         <StepEmoji answererCount={answererCount} />
         <div className={Style.Title}>{answererCount}명이 질문에 답했다곰!</div>
       </div>
+      {isViewingMyDiary && (
+        <div className={Style.Buttons}>
+          <button className={Style.Kakaotalk} onClick={handleShareKakaoTalk}>
+            <img src="/image/icon/icon-KakaoTalk.svg" />
+          </button>
+          <button className={Style.LinkCopy} onClick={handleCopyLink}>
+            <img src="/image/icon/icon-LinkCopy.svg" />
+          </button>
+        </div>
+      )}
       <div className={Style.List}>
         <SortOrderSelect
           sortOrder={sortOrder}
@@ -198,8 +206,6 @@ const AnswerListSection = (props: IAnswerListSection) => {
           diaryId={diaryId}
           correctAnswerer={correctAnswerer}
           handleDisplayResponse={handleDisplayResponse}
-          handleOpenChat={handleOpenChat}
-          handleOpenGame={handleOpenGame}
         />
         <Pagination
           currentPage={currentPage}
@@ -208,18 +214,6 @@ const AnswerListSection = (props: IAnswerListSection) => {
           generatePageNumbers={generatePageNumbers}
         />
       </div>
-      {isViewingMyDiary && (
-        <>
-          <div className={Style.Buttons}>
-            <button className={Style.Kakaotalk} onClick={handleShareKakaoTalk}>
-              <img src="/image/icon/icon-KakaoTalk.svg" />
-            </button>
-            <button className={Style.LinkCopy} onClick={handleCopyLink}>
-              <img src="/image/icon/icon-LinkCopy.svg" />
-            </button>
-          </div>
-        </>
-      )}
       {!isViewingMyDiary && buttonHandler && buttonText && (
         <Button onClick={buttonHandler}>{buttonText}</Button>
       )}

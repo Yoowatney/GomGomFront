@@ -1,5 +1,3 @@
-import type { IChatInfo } from '../Chat/types';
-
 interface IQuestionerInfo {
   _id: string;
   questioner: string;
@@ -34,6 +32,12 @@ interface IGameInfo {
   diaryAddress: string;
 }
 
+interface ISelectedAnswerer {
+  answererId: string;
+  roomId?: string;
+  diaryAddress: string;
+}
+
 interface IAnswerListSection {
   answererList: IAnswerer[];
   answererCount: number;
@@ -49,8 +53,6 @@ interface IAnswerListSection {
   handleSelectSortOrder: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   handlePageClick: (pageNumber: number) => void;
   handleDisplayResponse: (answererId: string) => Promise<void>;
-  handleOpenChat: (props: IChatInfo) => Promise<void>;
-  handleOpenGame: (props: IGameInfo) => void;
 }
 
 interface IAnswererClassName {
@@ -76,4 +78,5 @@ export {
   IQuestionerInfo,
   IQuestionInfo,
   IRequirementForAnswer,
+  ISelectedAnswerer,
 };

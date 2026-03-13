@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import instance from '@/api/api';
 import { getChatToken, openChat } from '@/api/Chat/chat';
 import { getDetailAnswer } from '@/api/Create/detailAnswer';
-import { answerAtom } from '@/store/answer';
+import { answerAtom, selectedAnswererAtom } from '@/store/answer';
 import { chatTokenAtom, guestAddressAtom, roomIdAtom } from '@/store/chat';
 import { questionAtom } from '@/store/create';
 import type { IGameInfo } from '@/types/Answer/types';
@@ -38,6 +38,7 @@ const useAnswerList = (
 
   const [, setQuestion] = useAtom(questionAtom);
   const [, setAnswer] = useAtom(answerAtom);
+  const [, setSelectedAnswerer] = useAtom(selectedAnswererAtom);
   const [, setChatToken] = useAtom(chatTokenAtom);
   const [, setRoomId] = useAtom(roomIdAtom);
   const [, setGuestAddress] = useAtom(guestAddressAtom);
@@ -49,7 +50,7 @@ const useAnswerList = (
 
   const [isConnected, setIsConnected] = useState<boolean>(false);
   const [chatNotAllow, setChatNotAllow] = useState<boolean>(false);
-  const [chatCreated, setChatCreated] = useState<boolean>(false);
+
   const [chatCreationError, setChatCreationError] = useState<boolean>(false);
   const [chatOwnerRequired, setChatOwnerRequired] = useState<boolean>(false);
 
@@ -67,9 +68,6 @@ const useAnswerList = (
     setChatNotAllow(false);
   }, []);
 
-  const resetChatCreated = useCallback(() => {
-    setChatCreated(false);
-  }, []);
 
   const resetChatCreationError = useCallback(() => {
     setChatCreationError(false);
@@ -148,6 +146,13 @@ const useAnswerList = (
         setAnswer(answerData.answer);
         setQuestion(answerData.question);
 
+        const selectedPerson = answererList.find((a) => a._id === answererId);
+        setSelectedAnswerer({
+          answererId,
+          roomId: selectedPerson?.roomId,
+          diaryAddress: diaryId,
+        });
+
         void navigate(`/answer/${diaryId}/${answererId}`);
       } catch (error) {
         if (error instanceof AxiosError) {
@@ -158,7 +163,7 @@ const useAnswerList = (
         }
       }
     },
-    [diaryId, navigate, setAnswer, setQuestion],
+    [answererList, diaryId, navigate, setAnswer, setQuestion, setSelectedAnswerer],
   );
 
   const handleOpenChat = async (props: IChatInfo): Promise<void> => {
@@ -184,7 +189,9 @@ const useAnswerList = (
               : answerer,
           ),
         );
-        setChatCreated(true);
+        setRoomId(newRoomId);
+        setGuestAddress(answererId);
+        void navigate('/chat/enter_room');
       }
     } catch (error) {
       console.error('Error fetching chat token or opening chat:', error);
@@ -227,8 +234,6 @@ const useAnswerList = (
     resetError,
     chatNotAllow,
     resetChatNotAllow,
-    chatCreated,
-    resetChatCreated,
     chatCreationError,
     resetChatCreationError,
     chatOwnerRequired,

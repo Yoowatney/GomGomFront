@@ -40,3 +40,24 @@
   width: 300px;
   overflow-wrap: break-word;
 }
+
+.ActionButtons {
+  display: flex;
+  gap: 12px;
+  width: 300px;
+}
+
+.ActionButton {
+  flex: 1;
+  padding: 10px 16px;
+  border: 1px solid $color-main;
+  border-radius: 8px;
+  background-color: transparent;
+  font-size: 14px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-main;
+    color: white;
+  }
+}

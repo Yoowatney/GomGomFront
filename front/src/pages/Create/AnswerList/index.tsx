@@ -35,14 +35,10 @@ const AnswerList = () => {
     resetError,
     chatNotAllow,
     resetChatNotAllow,
-    chatCreated,
-    resetChatCreated,
     chatCreationError,
     resetChatCreationError,
     chatOwnerRequired,
     resetChatOwnerRequired,
-    handleOpenChat,
-    handleOpenGame,
     start,
   } = useAnswerList(diaryAddress ?? '');
 
@@ -85,22 +81,6 @@ const AnswerList = () => {
     }
   }, [chatOwnerRequired, openModal, closeModal, resetChatOwnerRequired]);
 
-  useEffect(() => {
-    if (chatCreated) {
-      openModal({
-        title: '안내사항',
-        children: (
-          <div className={Style.Description}>
-            <div>채팅방이 생성되었습니다.</div>
-          </div>
-        ),
-        onConfirmCallback: () => {
-          resetChatCreated();
-          closeModal();
-        },
-      });
-    }
-  }, [chatCreated, openModal, closeModal, resetChatCreated]);
 
   useEffect(() => {
     if (chatNotAllow) {
@@ -173,8 +153,6 @@ const AnswerList = () => {
             handlePageClick={handlePageClick}
             generatePageNumbers={generatePageNumbers}
             handleDisplayResponse={handleDisplayResponse}
-            handleOpenChat={handleOpenChat}
-            handleOpenGame={handleOpenGame}
             correctAnswerer={correctAnswerer}
             diaryId={diaryAddress ?? ''}
             sortOrder={sortOrder}
